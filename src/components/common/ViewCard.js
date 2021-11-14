@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react';
-import {StyleSheet} from 'react-native';
+import {Image, StyleSheet, Text} from 'react-native';
 import {SIZES} from '../../constants';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
+import {View} from 'react-native-animatable';
 const ViewCard = props => {
-  const {bgColor, delay} = props;
+  const {bgColor, delay, title, iconImage} = props;
   const progress = useSharedValue(0);
   const scale = useSharedValue(0);
   const reanimatedStyle = useAnimatedStyle(() => {
@@ -26,11 +27,12 @@ const ViewCard = props => {
   }, []);
   return (
     <Animated.View
-      style={[
-        styles.container,
-        {backgroundColor: bgColor},
-        reanimatedStyle,
-      ]}></Animated.View>
+      style={[styles.container, {backgroundColor: bgColor}, reanimatedStyle]}>
+      <View style={styles.containerElement}>
+        <Image style={styles.boxImage} source={iconImage} />
+        <Text style={props.style}>{title}</Text>
+      </View>
+    </Animated.View>
   );
 };
 
@@ -40,5 +42,18 @@ const styles = StyleSheet.create({
     width: SIZES.width / 2.35,
     height: SIZES.height / 3.4,
     marginHorizontal: 20,
+  },
+  containerElement: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    marginHorizontal: 5,
+  },
+  boxImage: {
+    width: SIZES.width * 0.35,
+    height: SIZES.height * 0.15,
+    overflow: 'hidden',
+    resizeMode: 'contain',
   },
 });

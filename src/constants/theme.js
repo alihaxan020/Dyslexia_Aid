@@ -24,9 +24,9 @@ export const COLORS = {
   // rgba:
   primaryOpacity: 'rgba(40, 43, 164, 0.7)',
   //viewColor
-  lightCoral: '#bb8cbc',
+  lightCoral: '#bd8dbf',
   lightGoldenrod: '#fff79a',
-  lightGreen: '#7ccc9c',
+  lightGreen: '#82ca9c',
   lightOrange: '#f59678',
 };
 

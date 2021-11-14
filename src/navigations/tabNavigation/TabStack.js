@@ -17,7 +17,7 @@ const TabStack = () => {
       screenOptions={({route}) => ({
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: '#9098e3',
+          backgroundColor: '#e5e4e9',
         },
         tabBarIcon: ({focused}) => {
           switch (route.name) {
@@ -47,10 +47,10 @@ const TabStack = () => {
                 <View style={styles.cameraTab}>
                   <View
                     style={{
-                      // backgroundColor: '#8b8edf',
-                      width: 60,
-                      height: 60,
-                      borderRadius: 60,
+                      backgroundColor: focused ? null : '#2428a4',
+                      width: 50,
+                      height: 50,
+                      borderRadius: 25,
                       flexDirection: 'column',
                       justifyContent: 'center',
                       alignItems: 'center',
@@ -61,6 +61,7 @@ const TabStack = () => {
                       style={{
                         width: 30,
                         height: 30,
+                        tintColor: focused ? null : '#FFFFFF',
                       }}
                     />
                   </View>
@@ -120,7 +121,7 @@ export default TabStack;
 
 const styles = StyleSheet.create({
   cameraTab: {
-    backgroundColor: '#9098e3',
+    backgroundColor: '#e5e4e9',
     width: 70,
     height: 70,
     borderRadius: 70,
@@ -128,8 +129,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 10, // space from bottombar
-    borderEndWidth: 2,
+    bottom: 10,
+    borderEndWidth: 1,
     borderStartWidth: 1,
   },
 });

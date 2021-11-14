@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   StatusBar,
 } from 'react-native';
-import {useIsFocused} from '@react-navigation/native';
 import {images, COLORS, SIZES, FONTS} from '../../constants';
 import ViewCard from '../../components/common/ViewCard';
 import {useLogin} from '../../context/LoginProvider';
@@ -16,7 +15,6 @@ import FastImage from 'react-native-fast-image';
 import profile from '../../../assets/images/user.png';
 const profileUri = Image.resolveAssetSource(profile).uri;
 const HomeScreen = ({navigation}) => {
-  const isFocused = useIsFocused();
   const {userInfo} = useLogin();
   return (
     <ImageBackground
@@ -61,23 +59,41 @@ const HomeScreen = ({navigation}) => {
         <View style={[styles.viewCardContainer, {marginTop: SIZES.padding2}]}>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('DyslexicForm', {nameHassan: 'Ali Hassan'})
+              navigation.navigate('VerbalTest', {nameHassan: 'Ali Hassan'})
             }>
-            {isFocused ? (
-              <ViewCard bgColor={COLORS.lightCoral} delay={300} />
-            ) : null}
+            <ViewCard
+              bgColor={COLORS.lightCoral}
+              delay={300}
+              title="Dyslexia Test"
+              style={styles.titleStyle}
+              iconImage={images.dyslexiatest}
+            />
           </TouchableOpacity>
-          {isFocused ? (
-            <ViewCard bgColor={COLORS.lightGreen} delay={500} />
-          ) : null}
+
+          <ViewCard
+            bgColor={COLORS.lightGreen}
+            delay={500}
+            title="Self Assessment"
+            style={styles.titleStyle}
+            iconImage={images.selfassessment}
+          />
         </View>
         <View style={styles.viewCardContainer}>
-          {isFocused ? (
-            <ViewCard bgColor={COLORS.lightOrange} delay={700} />
-          ) : null}
-          {isFocused ? (
-            <ViewCard bgColor={COLORS.lightGoldenrod} delay={900} />
-          ) : null}
+          <ViewCard
+            bgColor={COLORS.lightOrange}
+            delay={700}
+            title="Reading Improvements"
+            style={styles.titleStyle}
+            iconImage={images.selfassessment}
+          />
+
+          <ViewCard
+            bgColor={COLORS.lightGoldenrod}
+            delay={900}
+            title="Saved Documents"
+            style={styles.titleStyle}
+            iconImage={images.selfassessment}
+          />
         </View>
       </View>
       <StatusBar translucent backgroundColor={'#ffffff00'} />
@@ -100,7 +116,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: COLORS.lightGray,
     borderWidth: 2,
   },
   viewCardContainer: {
@@ -108,5 +123,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: SIZES.radius,
     marginHorizontal: SIZES.radius,
+  },
+  titleStyle: {
+    fontSize: 21,
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
   },
 });
