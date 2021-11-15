@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
@@ -86,7 +87,15 @@ const SigninScreen = ({navigation}) => {
         showsVerticalScrollIndicator={false}>
         <View style={{flexDirection: 'column', alignItems: 'center'}}>
           <View style={styles.userIcon}>
-            <FontAwesome name="user" size={75} color={COLORS.secondary} />
+            <Image
+              source={images.user}
+              style={{
+                width: SIZES.width * 0.24,
+                height: SIZES.width * 0.24,
+                borderRadius: (SIZES.width * 0.24) / 2,
+                resizeMode: 'cover',
+              }}
+            />
           </View>
         </View>
         <Formik
@@ -225,10 +234,8 @@ const styles = StyleSheet.create({
     width: SIZES.width * 0.25,
     height: SIZES.width * 0.25,
     borderRadius: (SIZES.width * 0.25) / 2,
-    flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.primarybg,
+    elevation: 1,
   },
   errorContainer: {
     flexDirection: 'row',

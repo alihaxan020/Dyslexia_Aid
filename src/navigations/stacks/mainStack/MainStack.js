@@ -5,7 +5,11 @@ import VerbalTest from '../../../screens/home/dyslexiatest/VerbalTest/VerbalTest
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        gestureEnabled: true,
+        gestureDirection: 'horizontal',
+      }}>
       <Stack.Screen
         name="Tabs"
         component={TabStack}
@@ -14,7 +18,9 @@ const MainStack = () => {
       <Stack.Screen
         name="VerbalTest"
         component={VerbalTest}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+        }}
       />
     </Stack.Navigator>
   );

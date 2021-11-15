@@ -36,9 +36,9 @@ const HomeScreen = ({navigation}) => {
               cache: FastImage.cacheControl.immutable,
             }}
             style={{
-              height: 80,
-              width: 80,
-              borderRadius: 40,
+              height: 75,
+              width: 75,
+              borderRadius: 75 / 2,
               overflow: 'hidden',
             }}
             resizeMode={FastImage.resizeMode.contain}
@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2,
+    borderWidth: 1.5,
+    elevation: 5,
   },
   viewCardContainer: {
     flexDirection: 'row',
