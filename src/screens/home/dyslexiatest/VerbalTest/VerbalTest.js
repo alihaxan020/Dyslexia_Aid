@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {View, TouchableOpacity, ImageBackground, Text} from 'react-native';
+import {ImageBackground} from 'react-native';
 import styles from './styles';
-import LinearGradient from 'react-native-linear-gradient';
-import {images, COLORS} from '../../../../constants';
+import {images} from '../../../../constants';
+import HeaderTest from '../../../../components/common/HeaderTest';
 const questions = [
   {
     questionText: 'Sad',
@@ -41,7 +41,7 @@ const questions = [
     ],
   },
 ];
-const VerbalTest = () => {
+const VerbalTest = ({navigation}) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [report, setReport] = useState(false);
   const [score, setScore] = useState(0);
@@ -49,20 +49,13 @@ const VerbalTest = () => {
   const [wrong, setWrong] = useState(false);
   const [answer, setAnswer] = useState(false);
   const [nextBtn, setNextBtn] = useState(true);
+  const BackScreen = navigation.goBack;
   return (
     <ImageBackground
       source={images.backgroundApp}
       style={{flex: 1}}
       resizeMode="cover">
-      <LinearGradient
-        colors={[COLORS.primary, COLORS.secondary, COLORS.secondary]}
-        style={styles.headerContainer}
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 0}}>
-        <View style={styles.headerView}>
-          <Text style={styles.headingText}>Verbal Test</Text>
-        </View>
-      </LinearGradient>
+      <HeaderTest headerText="Verbal Test" BackScreen={BackScreen} />
     </ImageBackground>
   );
 };

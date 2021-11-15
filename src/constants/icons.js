@@ -14,6 +14,7 @@ export const emailIcon = require('../../assets/icons/emailIcon.png');
 export const genderIcon = require('../../assets/icons/genderIcon.png');
 export const passwordIcon = require('../../assets/icons/passwordIcon.png');
 export const nameIcon = require('../../assets/icons/nameIcon.png');
+export const turnLeft = require('../../assets/icons/turnLeft.png');
 
 export default {
   camera,
@@ -31,4 +32,5 @@ export default {
   genderIcon,
   emailIcon,
   passwordIcon,
+  turnLeft,
 };
