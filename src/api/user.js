@@ -3,6 +3,7 @@ import client from './client';
 export const signIn = async (email, password) => {
   try {
     const signInRes = await client.post('/sign-in', {email, password});
+
     if (signInRes.data.success) {
       const token = signInRes.data.token;
       await AsyncStorage.setItem('token', token);

@@ -31,31 +31,30 @@ const DyslexicForm = () => {
       ...prevState,
       avator: image.path,
     }));
+
     const formData = new FormData();
-    console.log(image);
-    formData.append('profile', {
+    const data = {
       name: new Date() + '_Profile',
-      uri: image,
+      uri: image.path,
       type: image.mime,
-    });
-    console.log(userInfo.token);
+    };
+
+    formData.append('profile', data);
+
     try {
       const token = await AsyncStorage.getItem('token');
-      console.log(token);
-      const res = await client.post(
-        '/upload-profile',
-        JSON.stringify(formData),
-        {
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'multipart/form-data',
-            Authorization: `JWT ${token}`,
-          },
+      console.log('Token: ', token);
+      let tokenProfile = `JWT ${token}`;
+      const res = await client.post('/upload-profile', formData, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+          authorization: tokenProfile,
         },
-      );
+      });
       console.log(res.data);
     } catch (error) {
-      console.log(error);
+      console.log('Error: ', error);
     }
   };
   return (
@@ -64,6 +63,7 @@ const DyslexicForm = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: 30,
       }}>
       <Text>DyslexicForm </Text>
       <View>

@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import {ImageBackground} from 'react-native';
+import {ImageBackground, View, Text} from 'react-native';
 import styles from './styles';
 import {images} from '../../../../constants';
 import HeaderTest from '../../../../components/common/HeaderTest';
+import LinearGradient from 'react-native-linear-gradient';
+
 const questions = [
   {
     questionText: 'Sad',
@@ -56,6 +58,18 @@ const VerbalTest = ({navigation}) => {
       style={{flex: 1}}
       resizeMode="cover">
       <HeaderTest headerText="Verbal Test" BackScreen={BackScreen} />
+      <View style={styles.bodyContainer}>
+        <Text style={styles.headingText}>
+          Press the below button to listen word
+        </Text>
+        <Text style={styles.levelText}>Level 1</Text>
+        {/* <LinearGradient
+          colors={[
+            COLORS.primary,
+            COLORS.secondary,
+            COLORS.secondary,
+          ]}></LinearGradient> */}
+      </View>
     </ImageBackground>
   );
 };

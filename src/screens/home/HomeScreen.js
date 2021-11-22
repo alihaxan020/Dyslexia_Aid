@@ -16,6 +16,7 @@ import profile from '../../../assets/images/user.png';
 const profileUri = Image.resolveAssetSource(profile).uri;
 const HomeScreen = ({navigation}) => {
   const {userInfo} = useLogin();
+  console.log(userInfo);
   return (
     <ImageBackground
       source={images.background}
@@ -30,7 +31,7 @@ const HomeScreen = ({navigation}) => {
         <View style={styles.userIcon}>
           <FastImage
             source={{
-              uri: userInfo.avator ? userInfo.avator : profileUri,
+              uri: userInfo.avatar ? userInfo.avatar : profileUri,
               headers: {Authorization: userInfo._id},
               priority: FastImage.priority.normal,
               cache: FastImage.cacheControl.immutable,
@@ -69,14 +70,15 @@ const HomeScreen = ({navigation}) => {
               iconImage={images.dyslexiatest}
             />
           </TouchableOpacity>
-
-          <ViewCard
-            bgColor={COLORS.lightGreen}
-            delay={500}
-            title="Self Assessment"
-            style={styles.titleStyle}
-            iconImage={images.selfassessment}
-          />
+          <TouchableOpacity onPress={() => navigation.navigate('DyslexicForm')}>
+            <ViewCard
+              bgColor={COLORS.lightGreen}
+              delay={500}
+              title="Self Assessment"
+              style={styles.titleStyle}
+              iconImage={images.selfassessment}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.viewCardContainer}>
           <ViewCard

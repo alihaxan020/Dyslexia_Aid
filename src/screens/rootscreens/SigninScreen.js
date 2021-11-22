@@ -9,7 +9,6 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 import {images, COLORS, SIZES, FONTS, icons} from '../../constants';
 import FormInput from '../../components/common/FormInput';

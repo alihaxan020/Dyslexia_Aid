@@ -17,7 +17,7 @@ const HeaderTest = ({headerText, BackScreen}) => {
         </TouchableOpacity>
         <Text style={styles.headingText}>{headerText}</Text>
         <Image
-          source={{uri: userInfo.avator}}
+          source={{uri: userInfo.avatar}}
           style={{
             width: 50,
             height: 50,
