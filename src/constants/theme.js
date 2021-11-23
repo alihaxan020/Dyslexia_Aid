@@ -28,6 +28,8 @@ export const COLORS = {
   lightGoldenrod: '#fff79a',
   lightGreen: '#82ca9c',
   lightOrange: '#f59678',
+  success: '#00C851',
+  error: '#ff4444',
 };
 
 export const SIZES = {

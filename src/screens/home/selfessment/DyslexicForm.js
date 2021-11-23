@@ -69,7 +69,7 @@ const DyslexicForm = () => {
       <View>
         <Image
           source={{
-            uri: localFile?.path || localFile || userInfo.avator || profileUri,
+            uri: localFile?.path || localFile || userInfo.avatar || profileUri,
           }}
           style={styles.imageStyle}
         />
