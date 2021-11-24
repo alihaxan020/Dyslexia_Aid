@@ -59,7 +59,6 @@ const VerbalTest = ({navigation}) => {
   const [showNextButton, setShowNextButton] = useState(false);
   const [showScoreModal, setShowScoreModal] = useState(false);
   const [backModal, setBackModal] = useState(false);
-  const [quit, setQuit] = useState(false);
   const [report, setReport] = useState(false);
   const speakRef = useRef();
   const validateAnswer = selectedOption => {
@@ -75,6 +74,7 @@ const VerbalTest = ({navigation}) => {
     setShowNextButton(true);
   };
   const handleNext = () => {
+    speakRef.current.stopSpeaker();
     if (currentQuestionIndex == allQuestions.length - 1) {
       // Last Question
       // Show Score Modal
@@ -105,180 +105,130 @@ const VerbalTest = ({navigation}) => {
       style={{flex: 1}}
       resizeMode="cover">
       <HeaderTest headerText="Verbal Test" BackScreen={handleContinue} />
-      <View style={styles.bodyContainer}>
-        {/* instruction Container */}
-        <View style={styles.instructionContainer}>
-          <Text style={styles.headingText}>
-            Press the below button to listen word
-          </Text>
-          <Text style={styles.levelText}>Level 1</Text>
-          <GradientView
-            colors={[COLORS.primary, COLORS.secondary]}
-            style={styles.questionCount}>
-            <Text style={styles.subHeading}>
-              {currentQuestionIndex + 1}/{allQuestions.length}
+      <TextToSpeech ref={speakRef} />
+      <ModalApp
+        visible={backModal}
+        feedback=" Do you want quit the Dyslexic Test?"
+        quit={BackScreen}
+        continueTest={() => setBackModal(false)}
+        quitText="Go Back"
+        continueTestText="Continue"
+      />
+      {report ? (
+        <Report />
+      ) : (
+        <View style={styles.bodyContainer}>
+          {/* instruction Container */}
+          <View style={styles.instructionContainer}>
+            <Text style={styles.headingText}>
+              Press the below button to listen word
             </Text>
-          </GradientView>
-        </View>
-        {/* Body options Section  */}
-        <View style={styles.optionsSection}>
-          <TextToSpeech ref={speakRef} />
-          <TouchableOpacity
-            onPress={() =>
-              speakRef.current.getAlert(
-                allQuestions[currentQuestionIndex]?.question,
-              )
-            }>
-            <Image style={styles.listenImage} source={images.listenicon} />
-          </TouchableOpacity>
-          <Text style={styles.headingText}>Select the correct option</Text>
-          <View style={styles.optionContainer}>
+            <Text style={styles.levelText}>Level 1</Text>
+            <GradientView
+              colors={[COLORS.primary, COLORS.secondary]}
+              style={styles.questionCount}>
+              <Text style={styles.subHeading}>
+                {currentQuestionIndex + 1}/{allQuestions.length}
+              </Text>
+            </GradientView>
+          </View>
+          {/* Body options Section  */}
+          <View style={styles.optionsSection}>
+            <TouchableOpacity
+              onPress={() =>
+                speakRef.current.getAlert(
+                  allQuestions[currentQuestionIndex]?.question,
+                )
+              }>
+              <Image style={styles.listenImage} source={images.listenicon} />
+            </TouchableOpacity>
+            <Text style={styles.headingText}>Select the correct option</Text>
             <View style={styles.optionContainer}>
-              {allQuestions[currentQuestionIndex]?.options.map(option => (
-                <View key={option}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-around',
-                    }}>
-                    <TouchableOpacity
-                      onPress={() => validateAnswer(option)}
-                      disabled={isOptionsDisabled}
-                      key={option}>
-                      <View style={styles.optionView}>
-                        <Text style={styles.optionText}>{option}</Text>
-                        {option == correctOption ? (
-                          <View
-                            style={{
-                              width: 30,
-                              height: 30,
-                              borderRadius: 30 / 2,
-                              backgroundColor: COLORS.success,
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                            }}>
-                            <MaterialCommunityIcons
-                              name="check"
+              <View style={styles.optionContainer}>
+                {allQuestions[currentQuestionIndex]?.options.map(option => (
+                  <View key={option}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-around',
+                      }}>
+                      <TouchableOpacity
+                        onPress={() => validateAnswer(option)}
+                        disabled={isOptionsDisabled}
+                        key={option}>
+                        <View style={styles.optionView}>
+                          <Text style={styles.optionText}>{option}</Text>
+                          {option == correctOption ? (
+                            <View
                               style={{
-                                color: COLORS.black,
-                                fontSize: 20,
-                              }}
-                            />
-                          </View>
-                        ) : option == currentOptionSelected ? (
-                          <View
-                            style={{
-                              width: 30,
-                              height: 30,
-                              borderRadius: 30 / 2,
-                              backgroundColor: COLORS.error,
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                            }}>
-                            <MaterialCommunityIcons
-                              name="close"
+                                width: 30,
+                                height: 30,
+                                borderRadius: 30 / 2,
+                                backgroundColor: COLORS.success,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                              }}>
+                              <MaterialCommunityIcons
+                                name="check"
+                                style={{
+                                  color: COLORS.black,
+                                  fontSize: 20,
+                                }}
+                              />
+                            </View>
+                          ) : option == currentOptionSelected ? (
+                            <View
                               style={{
-                                color: COLORS.white,
-                                fontSize: 20,
-                              }}
-                            />
-                          </View>
-                        ) : null}
-                      </View>
-                    </TouchableOpacity>
+                                width: 30,
+                                height: 30,
+                                borderRadius: 30 / 2,
+                                backgroundColor: COLORS.error,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                              }}>
+                              <MaterialCommunityIcons
+                                name="close"
+                                style={{
+                                  color: COLORS.white,
+                                  fontSize: 20,
+                                }}
+                              />
+                            </View>
+                          ) : null}
+                        </View>
+                      </TouchableOpacity>
+                    </View>
                   </View>
-                </View>
-              ))}
+                ))}
+              </View>
             </View>
           </View>
-        </View>
-        {showNextButton ? (
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={handleNext}>
-              <GradientView
-                colors={[COLORS.primary, COLORS.secondary]}
-                style={styles.nextButton}>
-                <Text style={styles.headingText}>Next</Text>
-              </GradientView>
-            </TouchableOpacity>
-          </View>
-        ) : null}
-        {/* Score modal  */}
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={showScoreModal}>
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: 'rgba(40, 43, 164,0.7)',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                backgroundColor: COLORS.white,
-                width: '90%',
-                borderRadius: 20,
-                padding: 20,
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 30, fontWeight: 'bold'}}>
-                {score > allQuestions.length / 2 ? 'Congratulations!' : 'Oops!'}
-              </Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'flex-start',
-                  alignItems: 'center',
-                  marginVertical: 20,
-                }}>
-                <Text
-                  style={{
-                    fontSize: 30,
-                    color:
-                      score > allQuestions.length / 2
-                        ? COLORS.success
-                        : COLORS.error,
-                  }}>
-                  {score}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: COLORS.black,
-                  }}>
-                  / {allQuestions.length}
-                </Text>
-              </View>
-              {/* Retry Quiz button */}
-              <TouchableOpacity
-                onPress={restartQuiz}
-                style={{
-                  backgroundColor: COLORS.accent,
-                  padding: 20,
-                  width: '100%',
-                  borderRadius: 20,
-                }}>
-                <Text
-                  style={{
-                    textAlign: 'center',
-                    color: COLORS.white,
-                    fontSize: 20,
-                  }}>
-                  Retry Quiz
-                </Text>
+          {showNextButton ? (
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity onPress={handleNext}>
+                <GradientView
+                  colors={[COLORS.primary, COLORS.secondary]}
+                  style={styles.nextButton}>
+                  <Text style={styles.headingText}>Next</Text>
+                </GradientView>
               </TouchableOpacity>
             </View>
-          </View>
-        </Modal>
-        <ModalApp
-          visible={backModal}
-          quit={BackScreen}
-          continueTest={() => setBackModal(false)}
-        />
-        <Report />
-      </View>
+          ) : null}
+          <ModalApp
+            visible={showScoreModal}
+            quit={restartQuiz}
+            continueTest={() => setReport(true)}
+            feedback={
+              score > allQuestions.length / 2 ? 'Congratulations!' : 'Oops!'
+            }
+            totalScore={allQuestions.length}
+            obtainedScore={score}
+            scoreModal={true}
+            quitText="Retry Test"
+            continueTestText="Get Report"
+          />
+        </View>
+      )}
     </ImageBackground>
   );
 };

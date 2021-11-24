@@ -17,7 +17,22 @@ import TextToSpeech from '../../components/common/TextToSpeech';
 const SplashScreen = ({navigation}) => {
   [speaker, setSpeaker] = useState(false);
   const speakRef = useRef();
-
+  const handleSpeech = () => {
+    if (speaker) {
+      setSpeaker(!speaker);
+      speakRef.current.stopSpeaker();
+    } else {
+      setSpeaker(!speaker);
+      const thingToSay =
+        ' Dyslexia Aid Welcome Help to improve speech sounds Get Started ';
+      speakRef.current.getAlert(thingToSay);
+    }
+  };
+  const handleNavigation = () => {
+    speakRef.current.stopSpeaker();
+    setSpeaker(false);
+    navigation.navigate('SigninScreen');
+  };
   return (
     <ImageBackground
       source={images.background}
@@ -35,10 +50,7 @@ const SplashScreen = ({navigation}) => {
             WELCOME
           </Animatable.Text>
           <TextToSpeech ref={speakRef} />
-          <TouchableOpacity
-            onPress={() =>
-              speakRef.current.getAlert('Ali Hassan are you not listening')
-            }>
+          <TouchableOpacity onPress={handleSpeech}>
             {speaker ? (
               <FontAwesome5 name="volume-up" color="green" size={25} />
             ) : (
@@ -65,7 +77,7 @@ const SplashScreen = ({navigation}) => {
             flexDirection: 'row',
             justifyContent: 'center',
           }}>
-          <TouchableOpacity onPress={() => navigation.navigate('SigninScreen')}>
+          <TouchableOpacity onPress={handleNavigation}>
             <LinearGradient
               colors={[COLORS.primary, COLORS.secondary, COLORS.secondary]}
               start={{x: 0, y: 1}}

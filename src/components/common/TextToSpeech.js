@@ -11,10 +11,6 @@ const TextToSpeech = forwardRef((props, ref) => {
     Tts.addEventListener('tts-finish');
     Tts.addEventListener('tts-cancel');
   }, []);
-
-  // The component instance will be extended
-  // with whatever you return from the callback passed
-  // as the second argument
   useImperativeHandle(ref, () => ({
     getAlert(value) {
       Tts.stop();
