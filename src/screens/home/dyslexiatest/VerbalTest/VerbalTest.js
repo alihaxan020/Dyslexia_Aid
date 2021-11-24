@@ -1,16 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   ImageBackground,
   View,
   Text,
   Image,
   TouchableOpacity,
+  Modal,
 } from 'react-native';
 import styles from './styles';
 import {images, COLORS} from '../../../../constants';
 import HeaderTest from '../../../../components/common/HeaderTest';
+import ModalApp from '../../../../components/common/ModalApp';
 import GradientView from '../../../../components/common/GradientView';
+import TextToSpeech from '../../../../components/common/TextToSpeech';
+import Report from './Report';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 const data = [
   {
     question: 'What’s the biggest planet in our solar system?',
@@ -53,7 +58,10 @@ const VerbalTest = ({navigation}) => {
   const [score, setScore] = useState(0);
   const [showNextButton, setShowNextButton] = useState(false);
   const [showScoreModal, setShowScoreModal] = useState(false);
-
+  const [backModal, setBackModal] = useState(false);
+  const [quit, setQuit] = useState(false);
+  const [report, setReport] = useState(false);
+  const speakRef = useRef();
   const validateAnswer = selectedOption => {
     let correct_option = allQuestions[currentQuestionIndex]['correct_option'];
     setCurrentOptionSelected(selectedOption);
@@ -81,29 +89,22 @@ const VerbalTest = ({navigation}) => {
   };
   const restartQuiz = () => {
     setShowScoreModal(false);
-
     setCurrentQuestionIndex(0);
     setScore(0);
-
     setCurrentOptionSelected(null);
     setCorrectOption(null);
     setIsOptionsDisabled(false);
     setShowNextButton(false);
-    Animated.timing(progress, {
-      toValue: 0,
-      duration: 1000,
-      useNativeDriver: false,
-    }).start();
   };
 
   const BackScreen = navigation.goBack;
-  console.log(score);
+  const handleContinue = () => setBackModal(true);
   return (
     <ImageBackground
       source={images.backgroundApp}
       style={{flex: 1}}
       resizeMode="cover">
-      <HeaderTest headerText="Verbal Test" BackScreen={BackScreen} />
+      <HeaderTest headerText="Verbal Test" BackScreen={handleContinue} />
       <View style={styles.bodyContainer}>
         {/* instruction Container */}
         <View style={styles.instructionContainer}>
@@ -121,9 +122,12 @@ const VerbalTest = ({navigation}) => {
         </View>
         {/* Body options Section  */}
         <View style={styles.optionsSection}>
+          <TextToSpeech ref={speakRef} />
           <TouchableOpacity
             onPress={() =>
-              console.log(allQuestions[currentQuestionIndex]?.question)
+              speakRef.current.getAlert(
+                allQuestions[currentQuestionIndex]?.question,
+              )
             }>
             <Image style={styles.listenImage} source={images.listenicon} />
           </TouchableOpacity>
@@ -199,6 +203,81 @@ const VerbalTest = ({navigation}) => {
             </TouchableOpacity>
           </View>
         ) : null}
+        {/* Score modal  */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={showScoreModal}>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: 'rgba(40, 43, 164,0.7)',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <View
+              style={{
+                backgroundColor: COLORS.white,
+                width: '90%',
+                borderRadius: 20,
+                padding: 20,
+                alignItems: 'center',
+              }}>
+              <Text style={{fontSize: 30, fontWeight: 'bold'}}>
+                {score > allQuestions.length / 2 ? 'Congratulations!' : 'Oops!'}
+              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                  marginVertical: 20,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 30,
+                    color:
+                      score > allQuestions.length / 2
+                        ? COLORS.success
+                        : COLORS.error,
+                  }}>
+                  {score}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: COLORS.black,
+                  }}>
+                  / {allQuestions.length}
+                </Text>
+              </View>
+              {/* Retry Quiz button */}
+              <TouchableOpacity
+                onPress={restartQuiz}
+                style={{
+                  backgroundColor: COLORS.accent,
+                  padding: 20,
+                  width: '100%',
+                  borderRadius: 20,
+                }}>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    color: COLORS.white,
+                    fontSize: 20,
+                  }}>
+                  Retry Quiz
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+        <ModalApp
+          visible={backModal}
+          quit={BackScreen}
+          continueTest={() => setBackModal(false)}
+        />
+        <Report />
       </View>
     </ImageBackground>
   );

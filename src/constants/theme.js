@@ -30,6 +30,7 @@ export const COLORS = {
   lightOrange: '#f59678',
   success: '#00C851',
   error: '#ff4444',
+  accent: '#3498db',
 };
 
 export const SIZES = {

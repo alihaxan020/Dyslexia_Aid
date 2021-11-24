@@ -68,8 +68,9 @@ export default styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: COLORS.primary,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: SIZES.width * 0.05,
     backgroundColor: COLORS.primarybg,
   },
   nextButton: {

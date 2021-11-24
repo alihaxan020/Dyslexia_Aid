@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 
 import {
   ImageBackground,
@@ -13,21 +13,11 @@ import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {images, COLORS, SIZES, FONTS} from '../../constants';
+import TextToSpeech from '../../components/common/TextToSpeech';
 const SplashScreen = ({navigation}) => {
-  const [speaker, setSpeaker] = useState(false);
-  const UpdateSpeaker = () => {
-    if (speaker) {
-      setSpeaker(!speaker);
-      console.log('speech OFF');
-      // Tts.stop();
-    } else {
-      console.log('speech ON');
-      setSpeaker(!speaker);
-      const thingToSay =
-        ' Dyslexia Aid Welcome Help to improve speech sounds Get Started ';
-      // Tts.speak(thingToSay);
-    }
-  };
+  [speaker, setSpeaker] = useState(false);
+  const speakRef = useRef();
+
   return (
     <ImageBackground
       source={images.background}
@@ -44,8 +34,11 @@ const SplashScreen = ({navigation}) => {
             style={styles.title}>
             WELCOME
           </Animatable.Text>
-
-          <TouchableOpacity onPress={UpdateSpeaker}>
+          <TextToSpeech ref={speakRef} />
+          <TouchableOpacity
+            onPress={() =>
+              speakRef.current.getAlert('Ali Hassan are you not listening')
+            }>
             {speaker ? (
               <FontAwesome5 name="volume-up" color="green" size={25} />
             ) : (

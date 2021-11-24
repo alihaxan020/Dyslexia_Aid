@@ -20,6 +20,8 @@ target 'dyslexia' do
 
   pod 'RNFastImage', :path => '../node_modules/react-native-fast-image'
 
+  pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
+
   target 'dyslexiaTests' do
     inherit! :complete
     # Pods for testing
