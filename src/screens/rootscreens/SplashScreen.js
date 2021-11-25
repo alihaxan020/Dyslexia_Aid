@@ -9,7 +9,6 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {images, COLORS, SIZES, FONTS} from '../../constants';
@@ -24,7 +23,7 @@ const SplashScreen = ({navigation}) => {
     } else {
       setSpeaker(!speaker);
       const thingToSay =
-        ' Dyslexia Aid Welcome Help to improve speech sounds Get Started ';
+        'DyslexiaAid will help you to improve reading skill and convert all your important document into text and summerize it.';
       speakRef.current.getAlert(thingToSay);
     }
   };
@@ -41,14 +40,9 @@ const SplashScreen = ({navigation}) => {
       <View style={styles.logoContainer}>
         <Image source={images.logo} style={styles.logoImage} />
       </View>
-      <Animatable.View style={styles.footer} animation="fadeInUpBig">
+      <View style={styles.footer}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Animatable.Text
-            animation="slideInLeft"
-            duration={1500}
-            style={styles.title}>
-            WELCOME
-          </Animatable.Text>
+          <Text style={styles.title}>WELCOME</Text>
           <TextToSpeech ref={speakRef} />
           <TouchableOpacity onPress={handleSpeech}>
             {speaker ? (
@@ -67,8 +61,8 @@ const SplashScreen = ({navigation}) => {
               ...FONTS.body3,
               color: COLORS.black,
             }}>
-            DyslexiaAid will help you to improve reading skill and save all your
-            important files in one place.
+            DyslexiaAid will help you to improve reading skill and convert all
+            your important document into text and summerize it.
           </Text>
         </View>
         <View
@@ -101,7 +95,7 @@ const SplashScreen = ({navigation}) => {
             </LinearGradient>
           </TouchableOpacity>
         </View>
-      </Animatable.View>
+      </View>
       <StatusBar translucent backgroundColor={'#ffffff00'} />
     </ImageBackground>
   );

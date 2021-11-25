@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
-import {Image, StyleSheet, Text} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {SIZES} from '../../constants';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
+  SlideInUp,
   withTiming,
+  SlideInDown,
 } from 'react-native-reanimated';
-import {View} from 'react-native-animatable';
 const ViewCard = props => {
   const {bgColor, delay, title, iconImage} = props;
   const progress = useSharedValue(0);
@@ -26,13 +27,13 @@ const ViewCard = props => {
     });
   }, []);
   return (
-    <Animated.View
+    <View
       style={[styles.container, {backgroundColor: bgColor}, reanimatedStyle]}>
       <View style={styles.containerElement}>
         <Image style={styles.boxImage} source={iconImage} />
         <Text style={props.style}>{title}</Text>
       </View>
-    </Animated.View>
+    </View>
   );
 };
 
