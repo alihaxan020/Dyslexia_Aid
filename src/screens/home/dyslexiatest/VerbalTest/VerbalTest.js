@@ -5,7 +5,6 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  Modal,
 } from 'react-native';
 import styles from './styles';
 import {images, COLORS} from '../../../../constants';

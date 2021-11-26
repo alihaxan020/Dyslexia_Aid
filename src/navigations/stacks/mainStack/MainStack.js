@@ -1,8 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabStack from '../../tabNavigation/TabStack';
-import VerbalTest from '../../../screens/home/dyslexiatest/VerbalTest/VerbalTest';
-import DyslexicForm from '../../../screens/home/selfessment/DyslexicForm';
+import DyslexicTestStack from '../Home/DyslexicTestStack';
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
   return (
@@ -17,16 +16,8 @@ const MainStack = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="VerbalTest"
-        component={VerbalTest}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="DyslexicForm"
-        component={DyslexicForm}
+        name="DyslexicTestStack"
+        component={DyslexicTestStack}
         options={{
           headerShown: false,
         }}

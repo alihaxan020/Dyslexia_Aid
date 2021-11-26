@@ -27,13 +27,13 @@ const ViewCard = props => {
     });
   }, []);
   return (
-    <View
+    <Animated.View
       style={[styles.container, {backgroundColor: bgColor}, reanimatedStyle]}>
       <View style={styles.containerElement}>
         <Image style={styles.boxImage} source={iconImage} />
         <Text style={props.style}>{title}</Text>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

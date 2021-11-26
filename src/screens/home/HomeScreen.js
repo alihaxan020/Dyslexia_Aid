@@ -17,6 +17,7 @@ const profileUri = Image.resolveAssetSource(profile).uri;
 const HomeScreen = ({navigation}) => {
   const {userInfo} = useLogin();
   console.log(userInfo);
+  // console.log(navigation.navigate('HistroyStack'));
   return (
     <ImageBackground
       source={images.background}
@@ -59,9 +60,7 @@ const HomeScreen = ({navigation}) => {
         }}>
         <View style={[styles.viewCardContainer, {marginTop: SIZES.padding2}]}>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('VerbalTest', {nameHassan: 'Ali Hassan'})
-            }>
+            onPress={() => navigation.navigate('DyslexicTestStack')}>
             <ViewCard
               bgColor={COLORS.lightCoral}
               delay={300}
@@ -70,7 +69,7 @@ const HomeScreen = ({navigation}) => {
               iconImage={images.dyslexiatest}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('DyslexicForm')}>
+          <TouchableOpacity onPress={() => console.log('Selfessment Form')}>
             <ViewCard
               bgColor={COLORS.lightGreen}
               delay={500}
@@ -81,21 +80,24 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.viewCardContainer}>
-          <ViewCard
-            bgColor={COLORS.lightOrange}
-            delay={700}
-            title="Reading Improvements"
-            style={styles.titleStyle}
-            iconImage={images.selfassessment}
-          />
-
-          <ViewCard
-            bgColor={COLORS.lightGoldenrod}
-            delay={900}
-            title="Saved Documents"
-            style={styles.titleStyle}
-            iconImage={images.selfassessment}
-          />
+          <TouchableOpacity onPress={() => console.log('Reading Improvements')}>
+            <ViewCard
+              bgColor={COLORS.lightOrange}
+              delay={700}
+              title="Reading Improvements"
+              style={styles.titleStyle}
+              iconImage={images.selfassessment}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => console.log('Save Document')}>
+            <ViewCard
+              bgColor={COLORS.lightGoldenrod}
+              delay={900}
+              title="Saved Documents"
+              style={styles.titleStyle}
+              iconImage={images.selfassessment}
+            />
+          </TouchableOpacity>
         </View>
       </View>
       <StatusBar translucent backgroundColor={'#ffffff00'} />

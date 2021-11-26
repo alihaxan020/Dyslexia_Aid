@@ -3,7 +3,6 @@ import {Image, StyleSheet, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../../screens/home/HomeScreen';
 import AccountStack from '../stacks/accountStack/AccountStack';
-import HomeStack from '../stacks/homeStack/HomeStack';
 import CameraStack from '../stacks/cameraStack/CamerStack';
 import SettingScreen from '../../screens/setting/SettingScreen';
 import HistoryStack from '../stacks/historyStack/HistoryStack';
@@ -90,7 +89,7 @@ const TabStack = () => {
       })}>
       <Tab.Screen
         name="Home"
-        component={HomeStack}
+        component={HomeScreen}
         options={{headerShown: false}}
       />
       <Tab.Screen
