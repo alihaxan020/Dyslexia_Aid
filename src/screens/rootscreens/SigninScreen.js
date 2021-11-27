@@ -16,12 +16,10 @@ import {useLogin} from '../../context/LoginProvider';
 import {signIn} from '../../api/user';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-
 const initialValues = {
   email: '',
   password: '',
 };
-
 const validationSchema = Yup.object({
   email: Yup.string()
     .email('Invalid email format')
@@ -34,21 +32,6 @@ const SigninScreen = ({navigation}) => {
   const [secure, setSecure] = useState(false);
   const [error, setError] = useState('');
   const {setIsLoggedIn, setUserInfo, setLoginPending} = useLogin();
-  // let isRendered = useRef(false);
-  // useEffect(() => {
-  //   const secureState = setError(false);
-  //   const errorState = setError('');
-  //   return () => {
-  //     secureState, errorState;
-  //   };
-  // // }, [secure, error]);
-  // useEffect(() => {
-  //   isRendered = true;
-  //   return () => {
-  //     isRendered = false;
-  //   };
-  // }, []);
-
   const handleSecure = () => {
     setSecure(!secure);
   };
