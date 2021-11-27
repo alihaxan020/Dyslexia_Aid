@@ -14,7 +14,11 @@ import GradientView from '../../../../components/common/GradientView';
 import TextToSpeech from '../../../../components/common/TextToSpeech';
 import Report from './Report';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import Animated, {
+  SlideInLeft,
+  SlideOutLeft,
+  BounceIn,
+} from 'react-native-reanimated';
 const data = [
   {
     question: 'What’s the biggest planet in our solar system?',
@@ -155,7 +159,13 @@ const VerbalTest = ({navigation}) => {
                         onPress={() => validateAnswer(option)}
                         disabled={isOptionsDisabled}
                         key={option}>
-                        <View style={styles.optionView}>
+                        <Animated.View
+                          style={styles.optionView}
+                          entering={SlideInLeft.duration(600)
+                            .springify()
+                            .damping(10)
+                            .stiffness(50)}
+                          exiting={SlideOutLeft.duration(500)}>
                           <Text style={styles.optionText}>{option}</Text>
                           {option == correctOption ? (
                             <View
@@ -194,7 +204,7 @@ const VerbalTest = ({navigation}) => {
                               />
                             </View>
                           ) : null}
-                        </View>
+                        </Animated.View>
                       </TouchableOpacity>
                     </View>
                   </View>

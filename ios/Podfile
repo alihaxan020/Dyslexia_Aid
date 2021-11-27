@@ -22,6 +22,8 @@ target 'dyslexia' do
 
   pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
 
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
   target 'dyslexiaTests' do
     inherit! :complete
     # Pods for testing

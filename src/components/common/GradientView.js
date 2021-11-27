@@ -3,7 +3,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const GradientView = props => {
   return (
-    <LinearGradient colors={props.colors} style={props.style}>
+    <LinearGradient colors={props.colors} style={props.style} {...props}>
       {props.children}
     </LinearGradient>
   );

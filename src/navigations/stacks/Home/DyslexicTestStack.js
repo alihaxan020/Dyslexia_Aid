@@ -2,6 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DyslexicTest from '../../../screens/home/dyslexiatest/DyslexicTest';
 import VerbalTest from '../../../screens/home/dyslexiatest/VerbalTest/VerbalTest';
+import WrittenTest from '../../../screens/home/dyslexiatest/writtenTest/WrittenTest';
 const Stack = createNativeStackNavigator();
 const DyslexicTestStack = () => {
   return (
@@ -20,13 +21,13 @@ const DyslexicTestStack = () => {
           headerShown: false,
         }}
       />
-      {/* <Stack.Screen
-        name="AssessmentForm"
-        component={DyslexicForm}
+      <Stack.Screen
+        name="WrittenTest"
+        component={WrittenTest}
         options={{
           headerShown: false,
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 };

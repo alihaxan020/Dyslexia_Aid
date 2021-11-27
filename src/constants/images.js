@@ -5,6 +5,7 @@ export const logo = require('../../assets/images/logo.png');
 export const selfassessment = require('../../assets/images/selfassessment.png');
 export const user = require('../../assets/images/user.png');
 export const listenicon = require('../../assets/images/listenicon.png');
+export const testIcon = require('../../assets/images/testIcon.png');
 
 export default {
   background,
@@ -14,4 +15,5 @@ export default {
   selfassessment,
   user,
   listenicon,
+  testIcon,
 };

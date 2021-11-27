@@ -4,9 +4,7 @@ import {SIZES} from '../../constants';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  SlideInUp,
   withTiming,
-  SlideInDown,
 } from 'react-native-reanimated';
 const ViewCard = props => {
   const {bgColor, delay, title, iconImage} = props;

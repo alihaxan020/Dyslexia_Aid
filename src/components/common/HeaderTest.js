@@ -1,21 +1,23 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import GradientView from './GradientView';
 import {COLORS, icons, SIZES, FONTS} from '../../constants';
 import {useLogin} from '../../context/LoginProvider';
+
 const HeaderTest = ({headerText, BackScreen}) => {
   const {userInfo} = useLogin();
   return (
-    <LinearGradient
+    <GradientView
       colors={[COLORS.primary, COLORS.secondary, COLORS.secondary]}
       style={styles.headerContainer}
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 0}}>
+      start={{x: 0, y: 0.5}}
+      end={{x: 1, y: 0.5}}>
       <View style={styles.headerView}>
         <TouchableOpacity onPress={() => BackScreen()}>
           <Image source={icons.turnLeft} style={styles.headerImage} />
         </TouchableOpacity>
         <Text style={styles.headingText}>{headerText}</Text>
+
         <Image
           source={{uri: userInfo.avatar}}
           style={{
@@ -29,7 +31,7 @@ const HeaderTest = ({headerText, BackScreen}) => {
           }}
         />
       </View>
-    </LinearGradient>
+    </GradientView>
   );
 };
 
@@ -38,7 +40,7 @@ export default HeaderTest;
 const styles = StyleSheet.create({
   headerContainer: {
     width: SIZES.width,
-    height: SIZES.height * 0.16,
+    height: SIZES.height * 0.15,
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomWidth: 4,
