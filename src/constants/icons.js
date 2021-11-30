@@ -15,6 +15,10 @@ export const genderIcon = require('../../assets/icons/genderIcon.png');
 export const passwordIcon = require('../../assets/icons/passwordIcon.png');
 export const nameIcon = require('../../assets/icons/nameIcon.png');
 export const turnLeft = require('../../assets/icons/turnLeft.png');
+export const difficultyEasy = require('../../assets/icons/difficultyEasy.png');
+export const difficultyMedium = require('../../assets/icons/difficultyMedium.png');
+export const difficultyHard = require('../../assets/icons/difficultyHard.png');
+export const scoreIcon = require('../../assets/icons/scoreIcon.png');
 
 export default {
   camera,
@@ -33,4 +37,8 @@ export default {
   emailIcon,
   passwordIcon,
   turnLeft,
+  difficultyEasy,
+  difficultyMedium,
+  difficultyHard,
+  scoreIcon,
 };

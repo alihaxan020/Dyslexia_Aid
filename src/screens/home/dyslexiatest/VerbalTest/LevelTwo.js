@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {View, Text, Image, TouchableOpacity, Modal} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {images, COLORS} from '../../../../constants';
 import HeaderTest from '../../../../components/common/HeaderTest';
@@ -44,7 +44,7 @@ const data = [
   },
 ];
 
-const VerbalTest = ({navigation}) => {
+const LevelTwo = ({navigation}) => {
   const allQuestions = data;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -59,23 +59,23 @@ const VerbalTest = ({navigation}) => {
   const [speechRate, setSpeechRate] = useState(0.5);
   const [speechPitch, setSpeechPitch] = useState(1);
   const speakRef = useRef();
-  const BackScreen = navigation.goBack;
-  const handleContinue = () => setBackModal(true);
-  const nextLevel = () => navigation.navigate('VerbalLevelTwo');
-
   const validateAnswer = selectedOption => {
     let correct_option = allQuestions[currentQuestionIndex]['correct_option'];
     setCurrentOptionSelected(selectedOption);
     setCorrectOption(correct_option);
     setIsOptionsDisabled(true);
     if (selectedOption == correct_option) {
+      // Set Score
       setScore(score + 1);
     }
+    // Show Next Button
     setShowNextButton(true);
   };
   const handleNext = () => {
     speakRef.current.stopSpeaker();
     if (currentQuestionIndex == allQuestions.length - 1) {
+      // Last Question
+      // Show Score Modal
       setShowScoreModal(true);
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -95,6 +95,8 @@ const VerbalTest = ({navigation}) => {
     setShowNextButton(false);
     setReport(false);
   };
+
+  const handleContinue = () => setBackModal(true);
   const handleSpeechRate = async rate => {
     speakRef.current.setSpeechRate(rate);
     setSpeechRate(rate);
@@ -103,9 +105,10 @@ const VerbalTest = ({navigation}) => {
     speakRef.current.setSpeechPitch(rate);
     setSpeechPitch(rate);
   };
+  const BackScreen = navigation.goBack;
   return (
     <BackgroundImageApp>
-      <HeaderTest headerText="Verbal Test" BackScreen={handleContinue} />
+      <HeaderTest headerText="Verbal Level 2" BackScreen={handleContinue} />
       <TextToSpeech ref={speakRef} />
       <ModalApp
         visible={backModal}
@@ -115,6 +118,7 @@ const VerbalTest = ({navigation}) => {
         quitText="Go Back"
         continueTestText="Continue"
       />
+
       <SpeechSettingModal
         visible={speechModal}
         handleSpeechPitch={handleSpeechPitch}
@@ -126,11 +130,10 @@ const VerbalTest = ({navigation}) => {
 
       {report ? (
         <Report
-          level="Level 1"
+          level="Level 2"
           obtainedScore={score}
           totalScore={data.length}
           resetTest={restartQuiz}
-          nextLevel={nextLevel}
         />
       ) : (
         <View style={styles.bodyContainer}>
@@ -139,7 +142,7 @@ const VerbalTest = ({navigation}) => {
             <Text style={styles.headingText}>
               Press the below button to listen word
             </Text>
-            <Text style={styles.levelText}>Level 1</Text>
+            <Text style={styles.levelText}>Level 2</Text>
             <GradientView
               colors={[COLORS.primary, COLORS.secondary]}
               style={styles.questionCount}>
@@ -279,4 +282,4 @@ const VerbalTest = ({navigation}) => {
   );
 };
 
-export default VerbalTest;
+export default LevelTwo;

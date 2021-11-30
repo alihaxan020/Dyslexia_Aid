@@ -1,63 +1,40 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
-import {images, SIZES} from '../../constants';
-import {stylesComponent} from './stylesComponent';
-const Report = () => {
+import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {icons} from '../../constants';
+import stylesComponent from './stylesComponent';
+const Report = props => {
+  const {obtainedScore, totalScore, level, resetTest, nextLevel} = props;
+  console.log(nextLevel);
+  let difficulty = level;
+  let difficultyIcon;
+  const nextLevelCheck = obtainedScore >= totalScore - 2 ? true : false;
+  let difficultyLevel;
+  if (difficulty == 'Level 1')
+    (difficultyLevel = 'Easy'), (difficultyIcon = icons.difficultyEasy);
+  if (difficulty == 'Level 2')
+    (difficultyLevel = 'Medium'), (difficultyIcon = icons.difficultyMedium);
+  if (difficulty == 'Level 3')
+    (difficultyLevel = 'Hard'), (difficultyIcon = icons.difficultyHard);
   return (
-    <View
-      style={{
-        width: SIZES.width,
-        height: SIZES.height * 0.9,
-        borderWidth: 4,
-        borderColor: 'red',
-      }}>
-      <View
-        style={{
-          alignItems: 'center',
-          height: SIZES.height * 0.8,
-          justifyContent: 'space-evenly',
-          borderWidth: 4,
-          borderColor: 'yellow',
-        }}>
-        <View>
-          <Image
-            source={images.user}
-            style={[
-              styles.avator,
-              {
-                width: 60,
-                height: 60,
-                borderColor: null,
-                right: 0,
-              },
-            ]}
-            resizeMode="cover"
-          />
-          <Text>Level 2</Text>
+    <View style={stylesComponent.reportContainer}>
+      <View style={stylesComponent.reportBody}>
+        <View style={stylesComponent.reportLevel}>
+          <Text style={stylesComponent.title}>{level}</Text>
+          <Text style={stylesComponent.headingText}>Report</Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: SIZES.width,
-            justifyContent: 'space-around',
-            borderWidth: 4,
-            borderColor: 'green',
-          }}>
+        <View style={stylesComponent.scoreContainer}>
           <View
             style={{
               justifyContent: 'center',
               alignItems: 'center',
             }}>
             <Image
-              source={images.listenicon}
-              style={[
-                styles.avator,
-                {width: 60, height: 60, borderColor: null, right: 0},
-              ]}
+              source={difficultyIcon}
+              style={stylesComponent.listenImage}
               resizeMode="cover"
             />
-            <Text>Diffculty</Text>
-            <Text>Medium</Text>
+            <Text style={stylesComponent.subHeading}>Diffculty</Text>
+            <Text style={stylesComponent.paragrapgh}>{difficultyLevel}</Text>
           </View>
 
           <View
@@ -66,43 +43,50 @@ const Report = () => {
               alignItems: 'center',
             }}>
             <Image
-              source={images.logo}
-              style={[
-                styles.avator,
-                {width: 60, height: 60, borderColor: null, right: 0},
-              ]}
-              resizeMode="cover"
+              source={icons.scoreIcon}
+              style={stylesComponent.listenImage}
+              resizeMode="contain"
             />
-            <Text>Score</Text>
-            <Text>2</Text>
+            <Text
+              style={[
+                stylesComponent.subHeading,
+                {color: obtainedScore >= totalScore - 2 ? 'green' : 'red'},
+              ]}>
+              Score
+            </Text>
+            <Text
+              style={[
+                stylesComponent.paragrapgh,
+                {color: obtainedScore >= totalScore - 2 ? 'green' : 'red'},
+              ]}>
+              {obtainedScore} / {totalScore}
+            </Text>
           </View>
         </View>
         <View
           style={{
             alignItems: 'center',
             flexDirection: 'column',
-            borderWidth: 4,
-            borderColor: 'yellow',
           }}>
-          <Text>Remarks</Text>
-          <Text>You have to correct 3 questions out of 4</Text>
-          <Text>move to next level</Text>
+          <Text style={stylesComponent.headingText}>Remarks</Text>
+          <Text style={stylesComponent.paragrapgh}>
+            You have to correct {totalScore - 2} questions out of {totalScore}
+          </Text>
+          <Text style={stylesComponent.paragrapgh}>move on to next level</Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: SIZES.width,
-            justifyContent: 'space-around',
-            borderWidth: 4,
-            borderColor: 'yellow',
-          }}>
-          <TouchableOpacity onPress={() => console.log('reset form')}>
-            <Text>Reset Level</Text>
+        <View style={stylesComponent.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => resetTest()}
+            style={stylesComponent.nextButton}>
+            <Text style={stylesComponent.paragrapgh}>Reset Test</Text>
           </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => console.log('Next Level')}>
-            <Text>Next Level</Text>
-          </TouchableOpacity>
+          {nextLevelCheck ? (
+            <TouchableOpacity
+              onPress={() => nextLevel()}
+              style={stylesComponent.nextButton}>
+              <Text style={stylesComponent.paragrapgh}>Next Level</Text>
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
     </View>
@@ -110,15 +94,3 @@ const Report = () => {
 };
 
 export default Report;
-const height_logo = SIZES.height * 0.08;
-const styles = StyleSheet.create({
-  avator: {
-    width: height_logo,
-    height: height_logo,
-    borderRadius: height_logo / 2,
-    overflow: 'hidden',
-    borderWidth: 3,
-    borderColor: 'white',
-    right: 10,
-  },
-});
