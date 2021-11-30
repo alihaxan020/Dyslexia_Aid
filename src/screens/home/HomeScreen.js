@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ImageBackground,
   Image,
   TouchableOpacity,
   StatusBar,
@@ -13,16 +12,15 @@ import ViewCard from '../../components/common/ViewCard';
 import {useLogin} from '../../context/LoginProvider';
 import FastImage from 'react-native-fast-image';
 import profile from '../../../assets/images/user.png';
+import BackgroundImageApp from '../../components/common/BackgroundImageApp';
 const profileUri = Image.resolveAssetSource(profile).uri;
+
 const HomeScreen = ({navigation}) => {
   const {userInfo} = useLogin();
   console.log(userInfo);
   // console.log(navigation.navigate('HistroyStack'));
   return (
-    <ImageBackground
-      source={images.background}
-      style={styles.background}
-      resizeMode="cover">
+    <BackgroundImageApp>
       <View
         style={{
           flexDirection: 'column',
@@ -69,7 +67,8 @@ const HomeScreen = ({navigation}) => {
               iconImage={images.dyslexiatest}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log('Selfessment Form')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('AssessmentFormStack')}>
             <ViewCard
               bgColor={COLORS.lightGreen}
               delay={500}
@@ -101,16 +100,12 @@ const HomeScreen = ({navigation}) => {
         </View>
       </View>
       <StatusBar translucent backgroundColor={'#ffffff00'} />
-    </ImageBackground>
+    </BackgroundImageApp>
   );
 };
 
 export default HomeScreen;
-const iconSize = SIZES.width * 0.2;
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
   userIcon: {
     marginTop: SIZES.height * 0.09,
     marginBottom: SIZES.base,

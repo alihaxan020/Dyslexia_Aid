@@ -6,7 +6,7 @@ export const selfassessment = require('../../assets/images/selfassessment.png');
 export const user = require('../../assets/images/user.png');
 export const listenicon = require('../../assets/images/listenicon.png');
 export const testIcon = require('../../assets/images/testIcon.png');
-
+export const voiceSetting = require('../../assets/images/voiceSetting.png');
 export default {
   background,
   backgroundApp,
@@ -16,4 +16,5 @@ export default {
   user,
   listenicon,
   testIcon,
+  voiceSetting,
 };

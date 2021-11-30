@@ -1,22 +1,13 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ImageBackground,
-  Image,
-} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {images, SIZES, COLORS} from '../../../constants';
 import HeaderTest from '../../../components/common/HeaderTest';
 import GradientView from '../../../components/common/GradientView';
+import BackgroundImageApp from '../../../components/common/BackgroundImageApp';
 const DyslexicTest = ({navigation}) => {
   const BackScreen = navigation.goBack;
   return (
-    <ImageBackground
-      source={images.backgroundApp}
-      style={{flex: 1}}
-      resizeMode="cover">
+    <BackgroundImageApp>
       <HeaderTest headerText="Dyslexic Test" BackScreen={BackScreen} />
       <View style={{flex: 1, justifyContent: 'flex-end'}}>
         <GradientView
@@ -63,7 +54,7 @@ const DyslexicTest = ({navigation}) => {
           </View>
         </GradientView>
       </View>
-    </ImageBackground>
+    </BackgroundImageApp>
   );
 };
 

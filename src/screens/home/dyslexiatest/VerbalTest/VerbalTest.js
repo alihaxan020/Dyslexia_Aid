@@ -1,24 +1,16 @@
 import React, {useState, useRef} from 'react';
-import {
-  ImageBackground,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, Image, TouchableOpacity, Modal} from 'react-native';
 import styles from './styles';
 import {images, COLORS} from '../../../../constants';
 import HeaderTest from '../../../../components/common/HeaderTest';
 import ModalApp from '../../../../components/common/ModalApp';
 import GradientView from '../../../../components/common/GradientView';
 import TextToSpeech from '../../../../components/common/TextToSpeech';
-import Report from './Report';
+import BackgroundImageApp from '../../../../components/common/BackgroundImageApp';
+import Report from '../../../../components/dyslexicTest/Report';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Animated, {
-  SlideInLeft,
-  SlideOutLeft,
-  BounceIn,
-} from 'react-native-reanimated';
+import Slider from '@react-native-community/slider';
+import Animated, {SlideInLeft, SlideOutLeft} from 'react-native-reanimated';
 const data = [
   {
     question: 'What’s the biggest planet in our solar system?',
@@ -62,7 +54,10 @@ const VerbalTest = ({navigation}) => {
   const [showNextButton, setShowNextButton] = useState(false);
   const [showScoreModal, setShowScoreModal] = useState(false);
   const [backModal, setBackModal] = useState(false);
+  const [speechModal, setSpeechModal] = useState(false);
   const [report, setReport] = useState(false);
+  const [speechRate, setSpeechRate] = useState(0.5);
+  const [speechPitch, setSpeechPitch] = useState(1);
   const speakRef = useRef();
   const validateAnswer = selectedOption => {
     let correct_option = allQuestions[currentQuestionIndex]['correct_option'];
@@ -102,11 +97,16 @@ const VerbalTest = ({navigation}) => {
 
   const BackScreen = navigation.goBack;
   const handleContinue = () => setBackModal(true);
+  const handleSpeechRate = async rate => {
+    speakRef.current.setSpeechRate(rate);
+    setSpeechRate(rate);
+  };
+  const handleSpeechPitch = async rate => {
+    speakRef.current.setSpeechPitch(rate);
+    setSpeechPitch(rate);
+  };
   return (
-    <ImageBackground
-      source={images.backgroundApp}
-      style={{flex: 1}}
-      resizeMode="cover">
+    <BackgroundImageApp>
       <HeaderTest headerText="Verbal Test" BackScreen={handleContinue} />
       <TextToSpeech ref={speakRef} />
       <ModalApp
@@ -117,6 +117,89 @@ const VerbalTest = ({navigation}) => {
         quitText="Go Back"
         continueTestText="Continue"
       />
+
+      <Modal animationType="slide" transparent={true} visible={speechModal}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(40,43,164,0.3)',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <View
+            style={{
+              backgroundColor: COLORS.white,
+              width: '90%',
+              borderRadius: 20,
+              padding: 20,
+              alignItems: 'center',
+            }}>
+            <Text
+              style={{
+                fontSize: 30,
+                fontWeight: 'bold',
+                width: '90%',
+                marginVertical: 20,
+                textAlign: 'center',
+              }}>
+              Speech Setting
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <Text>Voice Speed: </Text>
+              <Slider
+                style={{width: '80%', height: 40}}
+                minimumValue={0.01}
+                maximumValue={0.99}
+                value={speechRate}
+                onSlidingComplete={rate => handleSpeechRate(rate)}
+                minimumTrackTintColor="red"
+                maximumTrackTintColor="green"
+              />
+              {}
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <Text>Speech Rate: </Text>
+              <Slider
+                style={{width: '80%', height: 40}}
+                minimumValue={0}
+                maximumValue={1}
+                value={speechPitch}
+                onSlidingComplete={rate => handleSpeechPitch(rate)}
+                minimumTrackTintColor="red"
+                maximumTrackTintColor="green"
+              />
+            </View>
+            <TouchableOpacity
+              onPress={() => setSpeechModal(false)}
+              style={{
+                backgroundColor: COLORS.error,
+                padding: 10,
+                width: '40%',
+                borderRadius: 20,
+              }}>
+              <Text
+                style={{
+                  textAlign: 'center',
+                  color: COLORS.white,
+                  fontSize: 20,
+                }}>
+                CLOSE
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
       {report ? (
         <Report />
       ) : (
@@ -137,14 +220,38 @@ const VerbalTest = ({navigation}) => {
           </View>
           {/* Body options Section  */}
           <View style={styles.optionsSection}>
-            <TouchableOpacity
-              onPress={() =>
-                speakRef.current.getAlert(
-                  allQuestions[currentQuestionIndex]?.question,
-                )
-              }>
-              <Image style={styles.listenImage} source={images.listenicon} />
-            </TouchableOpacity>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+              }}>
+              <View
+                style={{
+                  width: '50%',
+                  justifyContent: 'flex-end',
+                  flexDirection: 'row',
+                }}>
+                <TouchableOpacity
+                  onPress={() =>
+                    speakRef.current.getAlert(
+                      allQuestions[currentQuestionIndex]?.question,
+                    )
+                  }>
+                  <Image
+                    style={styles.listenImage}
+                    source={images.listenicon}
+                  />
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity onPress={() => setSpeechModal(true)}>
+                <Image
+                  style={styles.speechSettings}
+                  source={images.voiceSetting}
+                />
+              </TouchableOpacity>
+            </View>
+
             <Text style={styles.headingText}>Select the correct option</Text>
             <View style={styles.optionContainer}>
               <View style={styles.optionContainer}>
@@ -238,7 +345,7 @@ const VerbalTest = ({navigation}) => {
           />
         </View>
       )}
-    </ImageBackground>
+    </BackgroundImageApp>
   );
 };
 
