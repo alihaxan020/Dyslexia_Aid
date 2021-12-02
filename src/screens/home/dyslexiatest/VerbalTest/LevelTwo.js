@@ -65,17 +65,13 @@ const LevelTwo = ({navigation}) => {
     setCorrectOption(correct_option);
     setIsOptionsDisabled(true);
     if (selectedOption == correct_option) {
-      // Set Score
       setScore(score + 1);
     }
-    // Show Next Button
     setShowNextButton(true);
   };
   const handleNext = () => {
     speakRef.current.stopSpeaker();
     if (currentQuestionIndex == allQuestions.length - 1) {
-      // Last Question
-      // Show Score Modal
       setShowScoreModal(true);
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -118,7 +114,6 @@ const LevelTwo = ({navigation}) => {
         quitText="Go Back"
         continueTestText="Continue"
       />
-
       <SpeechSettingModal
         visible={speechModal}
         handleSpeechPitch={handleSpeechPitch}

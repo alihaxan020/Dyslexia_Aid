@@ -1,10 +1,38 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {icons} from '../../constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import stylesComponent from './stylesComponent';
+import client from '../../api/client';
 const Report = props => {
-  const {obtainedScore, totalScore, level, resetTest, nextLevel} = props;
-  console.log(nextLevel);
+  const {resetTest, nextLevel, obtainedScore, totalScore, level} = props;
+
+  useEffect(() => {
+    async function postUserScore() {
+      const data = {
+        obtainedScore: `${obtainedScore}`,
+        totalScore: `${totalScore}`,
+        level: level,
+      };
+      console.log(data);
+      try {
+        const token = await AsyncStorage.getItem('token');
+        console.log('Token: ', token);
+        let tokenProfile = `JWT ${token}`;
+        const res = await client.post('/userscores', data, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',
+            authorization: tokenProfile,
+          },
+        });
+        console.log(res.data);
+      } catch (error) {
+        console.log('Error: ', error);
+      }
+    }
+    postUserScore();
+  }, []);
   let difficulty = level;
   let difficultyIcon;
   const nextLevelCheck = obtainedScore >= totalScore - 2 ? true : false;
