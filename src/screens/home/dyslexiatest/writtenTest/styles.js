@@ -93,4 +93,18 @@ export default styles = StyleSheet.create({
     width: '100%',
     height: '70%',
   },
+  listenImage: {
+    width: SIZES.width * 0.28,
+    height: SIZES.width * 0.28,
+    borderRadius: (SIZES.width * 0.28) / 2,
+    borderWidth: 1,
+    borderColor: 'black',
+    resizeMode: 'cover',
+  },
+  speechSettings: {
+    width: SIZES.width * 0.18,
+    height: SIZES.width * 0.18,
+    borderRadius: (SIZES.width * 0.18) / 2,
+    resizeMode: 'cover',
+  },
 });

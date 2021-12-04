@@ -16,7 +16,7 @@ const SpeechSettingModal = props => {
       <View
         style={{
           flex: 1,
-          backgroundColor: 'rgba(40,43,164,0.3)',
+          // backgroundColor: 'rgba(40,43,164,0.3)',
           alignItems: 'center',
           justifyContent: 'center',
         }}>

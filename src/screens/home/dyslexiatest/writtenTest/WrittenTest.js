@@ -33,6 +33,7 @@ const WrittenTest = ({navigation}) => {
   const [score, setScore] = useState(0);
   const [compare, setCompare] = useState(false);
   const [report, setReport] = useState(false);
+  const [speechEnd, setSpeechEnd] = useState(false);
 
   const BackScreen = navigation.goBack;
   const handleContinue = () => setBackModal(true);
@@ -57,6 +58,7 @@ const WrittenTest = ({navigation}) => {
     setLoading(true);
     try {
       await Voice.start('en-Us');
+      setSpeechEnd(true);
     } catch (error) {
       console.log('error raised', error);
     }
@@ -80,6 +82,7 @@ const WrittenTest = ({navigation}) => {
     setCheck(false);
     setResult('');
     setQuestion(question + 1);
+    setSpeechEnd(false);
     widthSet.value = 1;
   };
   const nextLevel = () => {
@@ -171,12 +174,14 @@ const WrittenTest = ({navigation}) => {
                       </TouchableOpacity>
                     )}
                   </View>
-                  <TouchableOpacity
-                    style={styles.submitBtn}
-                    onPress={stopRecording}
-                    disabled={check}>
-                    <Text style={styles.headingText}>Submit</Text>
-                  </TouchableOpacity>
+                  {speechEnd ? (
+                    <TouchableOpacity
+                      style={styles.submitBtn}
+                      onPress={stopRecording}
+                      disabled={check}>
+                      <Text style={styles.headingText}>Submit</Text>
+                    </TouchableOpacity>
+                  ) : null}
                 </>
               )}
               {check ? (
