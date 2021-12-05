@@ -1,14 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-
+import {Text, View} from 'react-native';
+import BackgroundImageApp from '../../components/common/BackgroundImageApp';
+import styles from './styles';
 const UserProfile = () => {
   return (
-    <View>
-      <Text>User Profile</Text>
-    </View>
+    <BackgroundImageApp>
+      <View style={styles.bodyContainer}></View>
+    </BackgroundImageApp>
   );
 };
 
 export default UserProfile;
-
-const styles = StyleSheet.create({});

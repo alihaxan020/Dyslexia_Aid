@@ -79,7 +79,7 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.viewCardContainer}>
-          <TouchableOpacity onPress={() => console.log('Reading Improvements')}>
+          <TouchableOpacity onPress={() => navigation.navigate('ReadingStack')}>
             <ViewCard
               bgColor={COLORS.lightOrange}
               delay={700}

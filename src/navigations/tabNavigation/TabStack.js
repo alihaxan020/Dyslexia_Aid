@@ -4,9 +4,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../../screens/home/HomeScreen';
 import AccountStack from '../stacks/accountStack/AccountStack';
 import CameraStack from '../stacks/cameraStack/CamerStack';
-import SettingScreen from '../../screens/setting/SettingScreen';
 import HistoryStack from '../stacks/historyStack/HistoryStack';
 import {icons} from '../../constants';
+import SettingStack from '../stacks/settingStack/SettingStack';
 
 const Tab = createBottomTabNavigator();
 const TabStack = () => {
@@ -109,7 +109,7 @@ const TabStack = () => {
       />
       <Tab.Screen
         name="Setting"
-        component={SettingScreen}
+        component={SettingStack}
         options={{headerShown: false}}
       />
     </Tab.Navigator>

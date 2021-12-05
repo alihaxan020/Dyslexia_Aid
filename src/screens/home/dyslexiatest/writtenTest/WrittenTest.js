@@ -121,6 +121,7 @@ const WrittenTest = ({navigation}) => {
       <View style={styles.bodyContainer}>
         {report ? (
           <Report
+            test="Written"
             resetTest={handleReset}
             nextLevel={nextLevel}
             obtainedScore={score}

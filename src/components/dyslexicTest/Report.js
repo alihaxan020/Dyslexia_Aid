@@ -5,37 +5,35 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import stylesComponent from './stylesComponent';
 import client from '../../api/client';
 const Report = props => {
-  const {resetTest, nextLevel, obtainedScore, totalScore, level} = props;
-
   useEffect(() => {
-    async function postUserScore() {
-      const data = {
-        obtainedScore: `${obtainedScore}`,
-        totalScore: `${totalScore}`,
-        level: level,
-      };
-      console.log(data);
+    // const {resetTest, nextLevel, obtainedScore, totalScore, level} = props;
+    const data = {
+      obtainedScore: `${props.obtainedScore}`,
+      totalScore: `${props.totalScore}`,
+      level: props.level,
+      test: props.test,
+    };
+    const postUserScore = async () => {
       try {
         const token = await AsyncStorage.getItem('token');
-        console.log('Token: ', token);
         let tokenProfile = `JWT ${token}`;
         const res = await client.post('/userscores', data, {
           headers: {
             Accept: 'application/json',
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',
             authorization: tokenProfile,
           },
         });
-        console.log(res.data);
       } catch (error) {
         console.log('Error: ', error);
       }
-    }
+    };
     postUserScore();
   }, []);
-  let difficulty = level;
+  let difficulty = props.level;
   let difficultyIcon;
-  const nextLevelCheck = obtainedScore >= totalScore - 2 ? true : false;
+  const nextLevelCheck =
+    props.obtainedScore >= props.totalScore - 2 ? true : false;
   let difficultyLevel;
   if (difficulty == 'Level 1')
     (difficultyLevel = 'Easy'), (difficultyIcon = icons.difficultyEasy);
@@ -47,7 +45,7 @@ const Report = props => {
     <View style={stylesComponent.reportContainer}>
       <View style={stylesComponent.reportBody}>
         <View style={stylesComponent.reportLevel}>
-          <Text style={stylesComponent.title}>{level}</Text>
+          <Text style={stylesComponent.title}>{props.level}</Text>
           <Text style={stylesComponent.headingText}>Report</Text>
         </View>
         <View style={stylesComponent.scoreContainer}>
@@ -78,16 +76,26 @@ const Report = props => {
             <Text
               style={[
                 stylesComponent.subHeading,
-                {color: obtainedScore >= totalScore - 2 ? 'green' : 'red'},
+                {
+                  color:
+                    props.obtainedScore >= props.totalScore - 2
+                      ? 'green'
+                      : 'red',
+                },
               ]}>
               Score
             </Text>
             <Text
               style={[
                 stylesComponent.paragrapgh,
-                {color: obtainedScore >= totalScore - 2 ? 'green' : 'red'},
+                {
+                  color:
+                    props.obtainedScore >= props.totalScore - 2
+                      ? 'green'
+                      : 'red',
+                },
               ]}>
-              {obtainedScore} / {totalScore}
+              {props.obtainedScore} / {props.totalScore}
             </Text>
           </View>
         </View>
@@ -98,19 +106,20 @@ const Report = props => {
           }}>
           <Text style={stylesComponent.headingText}>Remarks</Text>
           <Text style={stylesComponent.paragrapgh}>
-            You have to correct {totalScore - 2} questions out of {totalScore}
+            You have to correct {props.totalScore - 2} questions out of{' '}
+            {props.totalScore}
           </Text>
           <Text style={stylesComponent.paragrapgh}>move on to next level</Text>
         </View>
         <View style={stylesComponent.buttonContainer}>
           <TouchableOpacity
-            onPress={() => resetTest()}
+            onPress={() => props.resetTest()}
             style={stylesComponent.nextButton}>
             <Text style={stylesComponent.paragrapgh}>Reset Test</Text>
           </TouchableOpacity>
-          {nextLevelCheck ? (
+          {nextLevelCheck && props.nextLevel ? (
             <TouchableOpacity
-              onPress={() => nextLevel()}
+              onPress={() => props.nextLevel()}
               style={stylesComponent.nextButton}>
               <Text style={stylesComponent.paragrapgh}>Next Level</Text>
             </TouchableOpacity>

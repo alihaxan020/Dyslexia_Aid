@@ -101,6 +101,8 @@ const LevelTwo = ({navigation}) => {
     speakRef.current.setSpeechPitch(rate);
     setSpeechPitch(rate);
   };
+  const nextLevel = () => navigation.navigate('LevelThree');
+
   const BackScreen = navigation.goBack;
   return (
     <BackgroundImageApp>
@@ -125,10 +127,12 @@ const LevelTwo = ({navigation}) => {
 
       {report ? (
         <Report
+          test="Verbal"
           level="Level 2"
           obtainedScore={score}
           totalScore={data.length}
           resetTest={restartQuiz}
+          nextLevel={nextLevel}
         />
       ) : (
         <View style={styles.bodyContainer}>

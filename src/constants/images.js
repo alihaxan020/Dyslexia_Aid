@@ -7,6 +7,10 @@ export const user = require('../../assets/images/user.png');
 export const listenicon = require('../../assets/images/listenicon.png');
 export const testIcon = require('../../assets/images/testIcon.png');
 export const voiceSetting = require('../../assets/images/voiceSetting.png');
+export const facebook = require('../../assets/images/facebook.png');
+export const twitter = require('../../assets/images/twitter.png');
+export const instagram = require('../../assets/images/instagram.png');
+export const arrowRight = require('../../assets/images/arrowRight.png');
 export default {
   background,
   backgroundApp,
@@ -17,4 +21,8 @@ export default {
   listenicon,
   testIcon,
   voiceSetting,
+  facebook,
+  instagram,
+  twitter,
+  arrowRight,
 };

@@ -126,6 +126,7 @@ const VerbalTest = ({navigation}) => {
 
       {report ? (
         <Report
+          test="Verbal"
           level="Level 1"
           obtainedScore={score}
           totalScore={data.length}
