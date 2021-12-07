@@ -64,7 +64,9 @@ const SettingScreen = ({navigation}) => {
             </View>
           </View>
 
-          <View style={styles.viewContainer}>
+          <TouchableOpacity
+            style={styles.viewContainer}
+            onPress={() => navigation.navigate('RateUs')}>
             <View style={styles.iconView}>
               <AntDesign name="like1" size={30} color="white" />
             </View>
@@ -77,7 +79,7 @@ const SettingScreen = ({navigation}) => {
             <View style={styles.iconView}>
               <Image source={images.arrowRight} style={styles.icon} />
             </View>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.viewContainer}
             onPress={() => navigation.navigate('ContactUs')}>

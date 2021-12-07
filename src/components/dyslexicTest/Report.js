@@ -114,13 +114,23 @@ const Report = props => {
         <View style={stylesComponent.buttonContainer}>
           <TouchableOpacity
             onPress={() => props.resetTest()}
-            style={stylesComponent.nextButton}>
+            style={[
+              stylesComponent.nextButton,
+              {
+                backgroundColor: '#BA0020FF',
+              },
+            ]}>
             <Text style={stylesComponent.paragrapgh}>Reset Test</Text>
           </TouchableOpacity>
           {nextLevelCheck && props.nextLevel ? (
             <TouchableOpacity
               onPress={() => props.nextLevel()}
-              style={stylesComponent.nextButton}>
+              style={[
+                stylesComponent.nextButton,
+                {
+                  backgroundColor: '#0EBE2C',
+                },
+              ]}>
               <Text style={stylesComponent.paragrapgh}>Next Level</Text>
             </TouchableOpacity>
           ) : null}

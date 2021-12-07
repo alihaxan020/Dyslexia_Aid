@@ -32,7 +32,7 @@ const Progress = ({step, steps, height}) => {
         style={{
           height,
           borderRadius: height,
-          backgroundColor: '#282ba4',
+          backgroundColor: '#0EBE2C',
           width: '100%',
           position: 'absolute',
           left: 0,

@@ -26,6 +26,8 @@ target 'dyslexia' do
 
   pod 'react-native-voice', :path => '../node_modules/@react-native-community/voice'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'dyslexiaTests' do
     inherit! :complete
     # Pods for testing

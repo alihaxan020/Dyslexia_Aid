@@ -9,7 +9,8 @@ import Progress from '../../../components/common/Progress';
 import styles from '../dyslexiatest/writtenTest/styles';
 import stylesForm from './stylesForm';
 import FormReport from './FormReport';
-import {images} from '../../../constants';
+import GradientView from '../../../components/common/GradientView';
+import {images, COLORS} from '../../../constants';
 
 const data = [
   {
@@ -125,12 +126,41 @@ const AssessmentForm = ({navigation}) => {
               <FormReport userData={userData} handleReset={handleResetForm} />
             ) : (
               <>
-                <View style={stylesForm.questionContainer}>
+                <View
+                  style={{
+                    width: '90%',
+                    height: '15%',
+                    flexDirection: 'column',
+                    justifyContent: 'space-evenly',
+                    alignItems: 'center',
+                  }}>
                   <View
                     style={{
-                      height: '30%',
-                      justifyContent: 'space-between',
+                      width: '90%',
+                      marginHorizontal: '5%',
+                      marginTop: '5%',
                     }}>
+                    <Progress
+                      step={currentQuestionIndex}
+                      steps={question.length}
+                      height={20}
+                    />
+                  </View>
+                  <GradientView
+                    style={{
+                      height: '40%',
+                      width: '50%',
+                      borderRadius: 20,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    colors={[
+                      COLORS.primary,
+                      COLORS.secondary,
+                      COLORS.secondary,
+                    ]}
+                    start={{x: 0, y: 0.5}}
+                    end={{x: 1, y: 0.5}}>
                     <Text
                       style={[
                         styles.headingText,
@@ -138,28 +168,23 @@ const AssessmentForm = ({navigation}) => {
                       ]}>
                       Question {currentQuestionIndex + 1}/{question.length}
                     </Text>
-                    <View style={{width: '90%', marginHorizontal: '5%'}}>
-                      <Progress
-                        step={currentQuestionIndex}
-                        steps={question.length}
-                        height={10}
-                      />
-                    </View>
-                  </View>
+                  </GradientView>
+                </View>
+                <View style={stylesForm.questionContainer}>
                   <View
                     style={{
-                      height: '70%',
+                      height: '100%',
                       flexDirection: 'column',
                       justifyContent: 'space-around',
                     }}>
                     <View style={{paddingHorizontal: '3%'}}>
                       <Text
                         style={[
-                          styles.paragrapgh,
+                          styles.headingText,
                           {
                             alignSelf: 'center',
                             marginBottom: 5,
-                            paddingTop: 10,
+                            color: 'black',
                           },
                         ]}>
                         {question[currentQuestionIndex].question}
@@ -169,6 +194,8 @@ const AssessmentForm = ({navigation}) => {
                       style={{
                         flexDirection: 'row',
                         justifyContent: 'flex-end',
+                        alignItems: 'center',
+                        height: '35%',
                       }}>
                       <TouchableOpacity
                         onPress={() =>
@@ -178,13 +205,13 @@ const AssessmentForm = ({navigation}) => {
                         }>
                         <Image
                           source={images.listenicon}
-                          style={stylesForm.listenImage}
+                          style={stylesForm.updatedImage}
                         />
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => setSpeechModal(true)}>
                         <Image
                           source={images.voiceSetting}
-                          style={[stylesForm.listenImage, {tintColor: 'white'}]}
+                          style={[stylesForm.updatedImage, {borderWidth: null}]}
                         />
                       </TouchableOpacity>
                     </View>
@@ -200,8 +227,17 @@ const AssessmentForm = ({navigation}) => {
                     <TouchableOpacity
                       onPress={() => selectedOption(item)}
                       key={key}>
-                      <View style={stylesForm.optionView}>
-                        <Text style={[styles.headingText, {color: 'black'}]}>
+                      <View
+                        style={[
+                          stylesForm.optionView,
+                          {
+                            backgroundColor:
+                              item.toLowerCase() == 'yes'
+                                ? '#0EBE2C'
+                                : '#BA0020FF',
+                          },
+                        ]}>
+                        <Text style={[styles.headingText, {color: 'white'}]}>
                           {item}
                         </Text>
                       </View>
@@ -259,9 +295,16 @@ const AssessmentForm = ({navigation}) => {
             </Text>
 
             <TouchableOpacity
-              style={[styles.submitBtn, {width: '40%', height: '8%'}]}
+              style={[
+                styles.submitBtn,
+                {
+                  width: '40%',
+                  height: '8%',
+                  backgroundColor: '#0EBE2C',
+                },
+              ]}
               onPress={() => setStart(true)}>
-              <Text style={styles.subHeading}>Start</Text>
+              <Text style={[styles.headingText, {color: 'black'}]}>Start</Text>
             </TouchableOpacity>
           </View>
         )}

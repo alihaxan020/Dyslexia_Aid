@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import GradientView from './GradientView';
-import {COLORS, icons, SIZES, FONTS} from '../../constants';
+import {COLORS, icons, SIZES, FONTS, images} from '../../constants';
 import {useLogin} from '../../context/LoginProvider';
-
+const profileUri = Image.resolveAssetSource(images.user).uri;
 const HeaderTest = ({headerText, BackScreen}) => {
   const {userInfo} = useLogin();
   return (
@@ -19,7 +19,7 @@ const HeaderTest = ({headerText, BackScreen}) => {
         <Text style={styles.headingText}>{headerText}</Text>
 
         <Image
-          source={{uri: userInfo.avatar}}
+          source={{uri: userInfo.avatar ? userInfo.avatar : profileUri}}
           style={{
             width: 50,
             height: 50,
