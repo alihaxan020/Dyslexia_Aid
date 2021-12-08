@@ -11,6 +11,8 @@ export const facebook = require('../../assets/images/facebook.png');
 export const twitter = require('../../assets/images/twitter.png');
 export const instagram = require('../../assets/images/instagram.png');
 export const arrowRight = require('../../assets/images/arrowRight.png');
+export const assessmentIcon = require('../../assets/images/assessmentIcon.png');
+export const saveDocumentIcon = require('../../assets/images/saveDocumentIcon.png');
 export default {
   background,
   backgroundApp,
@@ -25,4 +27,6 @@ export default {
   instagram,
   twitter,
   arrowRight,
+  assessmentIcon,
+  saveDocumentIcon,
 };

@@ -60,7 +60,11 @@ const SettingScreen = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.iconView}>
-              <Image source={images.arrowRight} style={styles.icon} />
+              <Image
+                source={images.arrowRight}
+                style={styles.icon}
+                resizeMode="contain"
+              />
             </View>
           </View>
 
@@ -77,7 +81,11 @@ const SettingScreen = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.iconView}>
-              <Image source={images.arrowRight} style={styles.icon} />
+              <Image
+                source={images.arrowRight}
+                style={styles.icon}
+                resizeMode="contain"
+              />
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -93,7 +101,11 @@ const SettingScreen = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.iconView}>
-              <Image source={images.arrowRight} style={styles.icon} />
+              <Image
+                source={images.arrowRight}
+                style={styles.icon}
+                resizeMode="contain"
+              />
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -109,7 +121,11 @@ const SettingScreen = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.iconView}>
-              <Image source={images.arrowRight} style={styles.icon} />
+              <Image
+                source={images.arrowRight}
+                style={styles.icon}
+                resizeMode="contain"
+              />
             </View>
           </TouchableOpacity>
 
@@ -134,7 +150,11 @@ const SettingScreen = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.iconView}>
-              <Image source={images.arrowRight} style={styles.icon} />
+              <Image
+                source={images.arrowRight}
+                style={styles.icon}
+                resizeMode="contain"
+              />
             </View>
           </TouchableOpacity>
           <View style={styles.socialContainer}>

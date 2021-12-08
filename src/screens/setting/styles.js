@@ -94,6 +94,8 @@ export default styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: 'white',
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   socialContainer: {
     width: '100%',

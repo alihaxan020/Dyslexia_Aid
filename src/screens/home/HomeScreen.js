@@ -74,7 +74,7 @@ const HomeScreen = ({navigation}) => {
               delay={500}
               title="Self Assessment"
               style={styles.titleStyle}
-              iconImage={images.selfassessment}
+              iconImage={images.assessmentIcon}
             />
           </TouchableOpacity>
         </View>
@@ -94,7 +94,7 @@ const HomeScreen = ({navigation}) => {
               delay={900}
               title="Saved Documents"
               style={styles.titleStyle}
-              iconImage={images.selfassessment}
+              iconImage={images.saveDocumentIcon}
             />
           </TouchableOpacity>
         </View>

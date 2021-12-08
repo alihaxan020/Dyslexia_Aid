@@ -150,7 +150,7 @@ const SigninScreen = ({navigation}) => {
                     ) : (
                       <Text
                         style={{
-                          ...FONTS.h1,
+                          ...FONTS.h2,
                           fontWeight: 'bold',
                           color: COLORS.white,
                         }}>
@@ -168,7 +168,7 @@ const SigninScreen = ({navigation}) => {
                     end={{x: 1, y: 0}}>
                     <Text
                       style={{
-                        ...FONTS.h1,
+                        ...FONTS.h2,
                         fontWeight: 'bold',
                         color: COLORS.white,
                       }}>

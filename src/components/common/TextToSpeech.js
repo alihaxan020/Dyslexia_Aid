@@ -19,7 +19,6 @@ const TextToSpeech = forwardRef((props, ref) => {
     async getAlert(value) {
       Tts.stop();
       Tts.speak(value);
-      console.log(value);
     },
     stopSpeaker() {
       Tts.stop();

@@ -13,9 +13,9 @@ import SpeechSettingModal from '../../../../components/common/SpeechSettingModal
 import Animated, {SlideInLeft, SlideOutLeft} from 'react-native-reanimated';
 const data = [
   {
-    question: 'What’s the biggest planet in our solar system?',
-    options: ['Jupiter', 'Saturn', 'Neptune', 'Mercury'],
-    correct_option: 'Jupiter',
+    question: 'Sad',
+    options: ['Dad', 'Bad', 'Sad', 'Pad'],
+    correct_option: 'Sad',
   },
   {
     question: 'What attraction in India is one of the famus in the world?',
@@ -137,9 +137,6 @@ const VerbalTest = ({navigation}) => {
         <View style={styles.bodyContainer}>
           {/* instruction Container */}
           <View style={styles.instructionContainer}>
-            <Text style={styles.headingText}>
-              Press the below button to listen word
-            </Text>
             <Text style={styles.levelText}>Level 1</Text>
             <GradientView
               colors={[COLORS.primary, COLORS.secondary]}
@@ -148,6 +145,9 @@ const VerbalTest = ({navigation}) => {
                 {currentQuestionIndex + 1}/{allQuestions.length}
               </Text>
             </GradientView>
+            <Text style={styles.headingText}>
+              Press the below button to listen word
+            </Text>
           </View>
           {/* Body options Section  */}
           <View style={styles.optionsSection}>
@@ -159,7 +159,7 @@ const VerbalTest = ({navigation}) => {
               }}>
               <View
                 style={{
-                  width: '50%',
+                  width: '46%',
                   justifyContent: 'flex-end',
                   flexDirection: 'row',
                 }}>
@@ -254,7 +254,7 @@ const VerbalTest = ({navigation}) => {
             <View style={styles.buttonContainer}>
               <TouchableOpacity onPress={handleNext}>
                 <GradientView
-                  colors={[COLORS.primary, COLORS.secondary]}
+                  colors={[COLORS.success, COLORS.success]}
                   style={styles.nextButton}>
                   <Text style={styles.headingText}>Next</Text>
                 </GradientView>

@@ -93,9 +93,6 @@ const LevelThree = ({navigation}) => {
       ) : (
         <View style={styles.bodyContainer}>
           <View style={styles.instructionContainer}>
-            <Text style={styles.headingText}>
-              Press the below button to listen word
-            </Text>
             <Text style={styles.levelText}>Level 3</Text>
             <GradientView
               colors={[COLORS.primary, COLORS.secondary]}
@@ -104,8 +101,10 @@ const LevelThree = ({navigation}) => {
                 {currentQuestionIndex + 1}/{test.length}
               </Text>
             </GradientView>
+            <Text style={styles.headingText}>
+              Press the below button to listen word
+            </Text>
           </View>
-          <Text style={styles.headingText}>Write the pronounced word</Text>
           <View style={styles.optionsSection}>
             <View
               style={{
@@ -174,7 +173,7 @@ const LevelThree = ({navigation}) => {
                     {currentQuestionIndex == test.length - 1 ? (
                       <TouchableOpacity onPress={() => setReport(true)}>
                         <GradientView
-                          colors={[COLORS.primary, COLORS.secondary]}
+                          colors={[COLORS.success, COLORS.success]}
                           style={[styles.nextButton, {marginTop: 10}]}>
                           <Text style={styles.headingText}>Get Report</Text>
                         </GradientView>
@@ -204,7 +203,7 @@ const LevelThree = ({navigation}) => {
                   />
                   <TouchableOpacity onPress={() => handleSubmit()}>
                     <GradientView
-                      colors={[COLORS.primary, COLORS.secondary]}
+                      colors={[COLORS.success, COLORS.success]}
                       style={[styles.nextButton, {marginTop: 10}]}>
                       <Text style={styles.headingText}>Submit</Text>
                     </GradientView>

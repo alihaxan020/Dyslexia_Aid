@@ -34,3 +34,27 @@ export const signOut = async () => {
     return false;
   }
 };
+
+export const postUsersScroes = async test => {
+  try {
+    const tokenProfile = await AsyncStorage.getItem('token');
+    const usersScoresRes = await client.post(
+      '/postuserscores',
+      {test},
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          authorization: `JWT ${tokenProfile}`,
+        },
+      },
+    );
+    if (usersScoresRes.data.success) {
+      return usersScoresRes.data;
+    } else {
+      return 'Some Internal Server Error';
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};

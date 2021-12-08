@@ -72,6 +72,8 @@ const styles = StyleSheet.create({
   headerImage: {
     width: 35,
     height: 35,
-    tintColor: 'white',
+    borderRadius: 35 / 2,
+    tintColor: 'red',
+    backgroundColor: 'white',
   },
 });

@@ -8,8 +8,6 @@ export default styles = StyleSheet.create({
   headerContainer: {
     width: SIZES.width,
     height: SIZES.height * 0.35,
-    // borderWidth: 2,
-    // borderColor: 'green',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -51,5 +49,25 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 3,
+  },
+  iconStyle: {
+    width: SIZES.width * 0.09,
+    height: SIZES.width * 0.09,
+    borderRadius: (SIZES.width * 0.09) / 2,
+    overflow: 'hidden',
+    tintColor: 'white',
+  },
+  fieldStyle: {
+    // backgroundColor: 'white',
+    borderRadius: 30,
+    elevation: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    shadowColor: 'white',
+  },
+  userInfoContainer: {
+    width: SIZES.width,
+    height: SIZES.height * 0.45,
   },
 });

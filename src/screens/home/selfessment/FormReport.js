@@ -5,6 +5,7 @@ import stylesForm from './stylesForm';
 const FormReport = props => {
   const [show, setShow] = useState(false);
   const {userData, handleReset} = props;
+  console.log(userData);
   return (
     <ScrollView>
       <View style={[styles.bodyContainer, {justifyContent: 'space-around'}]}>
@@ -13,7 +14,7 @@ const FormReport = props => {
           style={[styles.submitBtn, {width: '50%', height: '8%'}]}
           onPress={() => setShow(!show)}>
           <Text style={styles.subHeading}>
-            {show ? 'Show' : 'Hide'} Responses
+            {show ? 'Hide' : 'Show'} Responses
           </Text>
         </TouchableOpacity>
         {show ? (

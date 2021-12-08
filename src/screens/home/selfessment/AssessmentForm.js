@@ -148,8 +148,8 @@ const AssessmentForm = ({navigation}) => {
                   </View>
                   <GradientView
                     style={{
-                      height: '40%',
-                      width: '50%',
+                      height: '45%',
+                      width: '30%',
                       borderRadius: 20,
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -166,7 +166,7 @@ const AssessmentForm = ({navigation}) => {
                         styles.headingText,
                         {alignSelf: 'center', marginBottom: 5},
                       ]}>
-                      Question {currentQuestionIndex + 1}/{question.length}
+                      {currentQuestionIndex + 1}/{question.length}
                     </Text>
                   </GradientView>
                 </View>
@@ -235,6 +235,8 @@ const AssessmentForm = ({navigation}) => {
                               item.toLowerCase() == 'yes'
                                 ? '#0EBE2C'
                                 : '#BA0020FF',
+                            borderWidth: 2,
+                            borderColor: 'blue',
                           },
                         ]}>
                         <Text style={[styles.headingText, {color: 'white'}]}>

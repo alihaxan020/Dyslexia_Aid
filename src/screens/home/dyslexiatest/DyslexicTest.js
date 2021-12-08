@@ -15,33 +15,32 @@ const DyslexicTest = ({navigation}) => {
           style={styles.bodyContainer}
           start={{x: 0, y: 0.8}}
           end={{x: 1, y: 1}}>
-          <View
-            style={[
-              styles.viewContainer,
-              {backgroundColor: COLORS.lightGoldenrod},
-            ]}>
+          <View style={[styles.viewContainer, {backgroundColor: 'white'}]}>
             <View style={styles.viewChildOne}>
               <Image source={images.testIcon} style={styles.imageStyle} />
             </View>
             <View style={styles.viewChildTwo}>
-              <Text style={styles.titleText}>Verbal Test</Text>
-              <Text style={styles.subTitle}>
+              <Text style={[styles.titleText, {color: 'blue'}]}>
+                Verbal Test
+              </Text>
+              <Text style={[styles.subTitle, {color: 'blue'}]}>
                 A test to assess your verbal skills
               </Text>
               <TouchableOpacity
                 onPress={() => navigation.navigate('VerbalTest')}
                 style={styles.buttonStyle}>
-                <Text style={styles.titleText}>Start</Text>
+                <Text style={[styles.titleText]}>Start</Text>
               </TouchableOpacity>
             </View>
           </View>
-          <View
-            style={[styles.viewContainer, {backgroundColor: COLORS.darkgreen}]}>
+          <View style={[styles.viewContainer, {backgroundColor: 'white'}]}>
             <View style={styles.viewChildOne}>
               <Image source={images.testIcon} style={styles.imageStyle} />
             </View>
             <View style={styles.viewChildTwo}>
-              <Text style={styles.titleText}>Written Test</Text>
+              <Text style={[styles.titleText, {color: 'blue'}]}>
+                Written Test
+              </Text>
               <Text style={styles.subTitle}>
                 A test to assess your writing skills
               </Text>
@@ -87,7 +86,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   viewChildTwo: {
-    flex: 1,
+    height: '100%',
+    width: '55%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
@@ -102,13 +102,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
+    color: 'blue',
   },
   buttonStyle: {
     justifyContent: 'center',
     alignItems: 'center',
     width: '50%',
-    height: '25%',
-    backgroundColor: COLORS.primary,
+    height: '30%',
+    backgroundColor: 'green',
     borderRadius: 30,
   },
 });

@@ -101,7 +101,7 @@ const LevelTwo = ({navigation}) => {
     speakRef.current.setSpeechPitch(rate);
     setSpeechPitch(rate);
   };
-  const nextLevel = () => navigation.navigate('LevelThree');
+  const nextLevel = () => navigation.navigate('VerbalLevelThree');
 
   const BackScreen = navigation.goBack;
   return (
@@ -138,9 +138,6 @@ const LevelTwo = ({navigation}) => {
         <View style={styles.bodyContainer}>
           {/* instruction Container */}
           <View style={styles.instructionContainer}>
-            <Text style={styles.headingText}>
-              Press the below button to listen word
-            </Text>
             <Text style={styles.levelText}>Level 2</Text>
             <GradientView
               colors={[COLORS.primary, COLORS.secondary]}
@@ -149,6 +146,9 @@ const LevelTwo = ({navigation}) => {
                 {currentQuestionIndex + 1}/{allQuestions.length}
               </Text>
             </GradientView>
+            <Text style={styles.headingText}>
+              Press the below button to listen word
+            </Text>
           </View>
           {/* Body options Section  */}
           <View style={styles.optionsSection}>
@@ -255,7 +255,7 @@ const LevelTwo = ({navigation}) => {
             <View style={styles.buttonContainer}>
               <TouchableOpacity onPress={handleNext}>
                 <GradientView
-                  colors={[COLORS.primary, COLORS.secondary]}
+                  colors={[COLORS.success, COLORS.success]}
                   style={styles.nextButton}>
                   <Text style={styles.headingText}>Next</Text>
                 </GradientView>

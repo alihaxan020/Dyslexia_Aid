@@ -51,14 +51,12 @@ export default styles = StyleSheet.create({
     width: SIZES.width * 0.28,
     height: SIZES.width * 0.28,
     borderRadius: (SIZES.width * 0.28) / 2,
-    borderWidth: 1,
-    borderColor: 'black',
     resizeMode: 'cover',
   },
   speechSettings: {
-    width: SIZES.width * 0.18,
-    height: SIZES.width * 0.18,
-    borderRadius: (SIZES.width * 0.18) / 2,
+    width: SIZES.width * 0.13,
+    height: SIZES.width * 0.13,
+    borderRadius: (SIZES.width * 0.13) / 2,
     resizeMode: 'cover',
   },
   optionContainer: {
