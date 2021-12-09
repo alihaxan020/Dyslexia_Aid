@@ -58,6 +58,13 @@ const SigninScreen = ({navigation}) => {
       actions.resetForm();
     }, 2000);
   };
+  useEffect(() => {
+    onSubmit();
+    return () => {
+      setSecure(false);
+      setError('');
+    };
+  }, []);
 
   return (
     <ImageBackground
@@ -110,7 +117,7 @@ const SigninScreen = ({navigation}) => {
               </View>
               <View style={styles.forgetPassword}>
                 <TouchableOpacity
-                  onPress={() => console.log('Forget password')}>
+                  onPress={() => navigation.navigate('ForgetPassword')}>
                   <Text
                     style={{
                       ...FONTS.h2,

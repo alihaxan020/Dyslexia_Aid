@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, ScrollView, Image, ImageBackground} from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  Image,
+  ImageBackground,
+  ActivityIndicator,
+} from 'react-native';
 import Chart from '../../components/dyslexicTest/Chart';
 import styles from './styles';
 import {images, COLORS, icons, SIZES} from '../../constants';
 import {useLogin} from '../../context/LoginProvider';
-import GradientView from '../../components/common/GradientView';
 import Profile from '../../../assets/images/user.png';
 import {postUsersScroes} from '../../api/user';
 import LottieView from 'lottie-react-native';
-import {set} from 'react-native-reanimated';
 
 const profileUri = Image.resolveAssetSource(Profile).uri;
 
@@ -129,7 +134,7 @@ const UserProfile = () => {
                       fontWeight: '300',
                       fontSize: SIZES.width * 0.1,
                     }}>
-                    ?
+                    <ActivityIndicator />
                   </Text>
                 )}
               </View>
@@ -161,7 +166,7 @@ const UserProfile = () => {
                       fontWeight: '300',
                       fontSize: SIZES.width * 0.1,
                     }}>
-                    ?
+                    <ActivityIndicator />
                   </Text>
                 )}
               </View>
@@ -194,7 +199,7 @@ const UserProfile = () => {
                       fontWeight: '300',
                       fontSize: SIZES.width * 0.1,
                     }}>
-                    ?
+                    <ActivityIndicator />
                   </Text>
                 )}
               </View>
@@ -247,7 +252,7 @@ const UserProfile = () => {
                       fontWeight: '300',
                       fontSize: SIZES.width * 0.1,
                     }}>
-                    ?
+                    <ActivityIndicator />
                   </Text>
                 )}
               </View>
@@ -279,7 +284,7 @@ const UserProfile = () => {
                       fontWeight: '300',
                       fontSize: SIZES.width * 0.1,
                     }}>
-                    ?
+                    <ActivityIndicator />
                   </Text>
                 )}
               </View>
@@ -312,7 +317,7 @@ const UserProfile = () => {
                       fontWeight: '300',
                       fontSize: SIZES.width * 0.1,
                     }}>
-                    ?
+                    <ActivityIndicator />
                   </Text>
                 )}
               </View>

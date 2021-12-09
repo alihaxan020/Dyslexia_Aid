@@ -58,3 +58,39 @@ export const postUsersScroes = async test => {
     console.log(error.message);
   }
 };
+
+export const forgetPassword = async email => {
+  try {
+    const forgetRes = await client.post('/forget-password', {email});
+    if (forgetRes.data.success) {
+      return forgetRes.data;
+    } else {
+      return forgetRes.data;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const updatePassword = async (token, newPassword) => {
+  try {
+    const updatePasswordRes = await client.post(
+      '/updatepassword',
+      {newPassword},
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          authorization: `JWT ${token}`,
+        },
+      },
+    );
+    if (updatePasswordRes.data.success) {
+      return updatePasswordRes.data;
+    } else {
+      return updatePasswordRes.data;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};

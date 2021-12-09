@@ -13,6 +13,7 @@ export const instagram = require('../../assets/images/instagram.png');
 export const arrowRight = require('../../assets/images/arrowRight.png');
 export const assessmentIcon = require('../../assets/images/assessmentIcon.png');
 export const saveDocumentIcon = require('../../assets/images/saveDocumentIcon.png');
+export const verifyIcon = require('../../assets/images/verifyIcon.png');
 export default {
   background,
   backgroundApp,
@@ -29,4 +30,5 @@ export default {
   arrowRight,
   assessmentIcon,
   saveDocumentIcon,
+  verifyIcon,
 };
