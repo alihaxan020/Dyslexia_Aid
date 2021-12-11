@@ -41,9 +41,9 @@ const SigninScreen = ({navigation}) => {
     try {
       const res = await signIn(values.email, values.password);
       if (res.data.success) {
-        setIsLoggedIn(true);
-        setTimeout(() => setLoginPending(false), 2000);
+        setTimeout(() => setLoginPending(false), 1000);
         setUserInfo(res.data.user);
+        setIsLoggedIn(true);
       }
     } catch (error) {
       setLoginPending(false);
@@ -60,8 +60,8 @@ const SigninScreen = ({navigation}) => {
   };
   useEffect(() => {
     return () => {
+      setError('');
       setSecure(false);
-      setError();
     };
   }, []);
 

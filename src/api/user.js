@@ -94,3 +94,24 @@ export const updatePassword = async (token, newPassword) => {
     console.log(error.message);
   }
 };
+
+export const updateProfile = async data => {
+  try {
+    const tokenProfile = await AsyncStorage.getItem('token');
+    const updateProfileRes = await client.post('/updateprofile', data, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: `JWT ${tokenProfile}`,
+      },
+    });
+
+    if (updateProfileRes.data.success) {
+      return updateProfileRes.data;
+    } else {
+      return updateProfileRes.data;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};

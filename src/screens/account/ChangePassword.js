@@ -15,6 +15,7 @@ import {updatePassword} from '../../api/user';
 import LottieView from 'lottie-react-native';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 const initialValues = {
   password: '',
   confirmPassword: '',
@@ -156,7 +157,18 @@ const ChangePassword = props => {
                 alignItems: 'center',
               }}>
               <TouchableOpacity onPress={() => props.handleBack()}>
-                <View style={[styles.verify, {alignItems: 'center'}]}>
+                <View
+                  style={[
+                    styles.verify,
+                    {
+                      alignItems: 'center',
+                      backgroundColor: COLORS.error,
+                      flexDirection: 'row',
+                      justifyContent: 'space-evenly',
+                    },
+                  ]}>
+                  <FontAwesome5 name="arrow-left" size={30} />
+
                   <Text
                     style={{
                       ...FONTS.h2,

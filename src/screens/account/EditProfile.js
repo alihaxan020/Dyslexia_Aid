@@ -14,11 +14,12 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BottomSheet from '../../components/common/BottomSheet';
 import GradientView from '../../components/common/GradientView';
+import AppLoader from '../../components/common/AppLoader';
 import {useLogin} from '../../context/LoginProvider';
 import client from '../../api/client';
+import {updateProfile} from '../../api/user';
 import profile from '../../../assets/images/user.png';
 import {images, COLORS, icons} from '../../constants';
-import {Picker} from '@react-native-picker/picker';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 const profileUri = Image.resolveAssetSource(profile).uri;
 import {Formik} from 'formik';
@@ -35,10 +36,12 @@ const validationSchema = yup.object({
   gender: yup.string().required('Gender must be between Male or Female.'),
 });
 
-const EditProfile = () => {
+const EditProfile = ({navigation}) => {
   const [localFile, setLocalFile] = useState(null);
   const {setUserInfo, userInfo} = useLogin();
   const [changePassword, setChangePassword] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [message, setMessage] = useState('');
   const profile = {
     name: userInfo.name,
     age: userInfo.age,
@@ -62,7 +65,7 @@ const EditProfile = () => {
     setLocalFile(image);
     setUserInfo(prevState => ({
       ...prevState,
-      avator: image.path,
+      avatar: image.path,
     }));
 
     const formData = new FormData();
@@ -76,7 +79,6 @@ const EditProfile = () => {
 
     try {
       const token = await AsyncStorage.getItem('token');
-      console.log('Token: ', token);
       let tokenProfile = `JWT ${token}`;
       const res = await client.post('/upload-profile', formData, {
         headers: {
@@ -85,14 +87,47 @@ const EditProfile = () => {
           authorization: tokenProfile,
         },
       });
-      console.log(res.data);
+      console.log(res.data.image);
+      setUserInfo(prevState => ({
+        ...prevState,
+        avator: res.data.image,
+      }));
     } catch (error) {
       console.log('Error: ', error);
     }
   };
   const handleChange = () => setChangePassword(false);
+
+  const onSubmit = async (values, actions) => {
+    setLoader(true);
+    try {
+      const res = await updateProfile({...values});
+      if (res.success === true) {
+        setUserInfo(prevState => ({
+          ...prevState,
+          name: values.name,
+          age: values.age,
+          gender: values.gender,
+        }));
+        setMessage(res.message);
+        setTimeout(() => {
+          setLoader(false);
+        }, 2000);
+        navigation.navigate('UserProfile');
+      }
+      if (res.success === false) {
+        setLoader(false);
+      }
+    } catch (error) {
+      setLoader(false);
+      console.log(error.message);
+      actions.resetForm();
+    }
+  };
+
   return (
     <ImageBackground style={{flex: 1}} source={images.background}>
+      {loader ? <AppLoader /> : null}
       {changePassword ? (
         <ChangePassword handleBack={handleChange} />
       ) : (
@@ -123,12 +158,16 @@ const EditProfile = () => {
               start={{x: 0, y: 0}}
               end={{x: 1, y: 1}}
               style={styles.gradientContainer}>
+              {message ? (
+                <Text
+                  style={{textAlign: 'center', fontSize: 20, color: 'white'}}>
+                  {message}
+                </Text>
+              ) : null}
               <Formik
                 initialValues={profile}
                 validationSchema={validationSchema}
-                onSubmit={(values, actions) => {
-                  console.log(values);
-                }}>
+                onSubmit={onSubmit}>
                 {formikProps => (
                   <React.Fragment>
                     <View>
@@ -263,6 +302,24 @@ const EditProfile = () => {
               </Formik>
               <>
                 <TouchableOpacity
+                  onPress={() => navigation.navigate('UserProfile')}
+                  style={{
+                    width: width * 0.4,
+                    height: height * 0.05,
+                    backgroundColor: COLORS.error,
+                    borderRadius: 20,
+                    justifyContent: 'space-around',
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                  }}>
+                  <FontAwesome5 name="arrow-left" size={30} />
+                  <Text
+                    style={{fontSize: 20, color: 'white', fontWeight: 'bold'}}>
+                    Go Back
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
                   onPress={() => setChangePassword(true)}
                   style={{
                     width: width * 0.6,
@@ -273,11 +330,12 @@ const EditProfile = () => {
                     alignItems: 'center',
                     flexDirection: 'row',
                   }}>
+                  <FontAwesome5 name="user-lock" size={30} />
                   <Text
                     style={{fontSize: 20, color: 'white', fontWeight: 'bold'}}>
                     Change Password
                   </Text>
-                  <FontAwesome5 name="user-lock" size={30} />
+                  <FontAwesome5 name="arrow-right" size={30} />
                 </TouchableOpacity>
               </>
             </GradientView>

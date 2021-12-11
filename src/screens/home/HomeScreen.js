@@ -17,8 +17,6 @@ const profileUri = Image.resolveAssetSource(profile).uri;
 
 const HomeScreen = ({navigation}) => {
   const {userInfo} = useLogin();
-  console.log(userInfo);
-  // console.log(navigation.navigate('HistroyStack'));
   return (
     <BackgroundImageApp>
       <View
