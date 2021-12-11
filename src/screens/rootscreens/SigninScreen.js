@@ -59,10 +59,9 @@ const SigninScreen = ({navigation}) => {
     }, 2000);
   };
   useEffect(() => {
-    onSubmit();
     return () => {
       setSecure(false);
-      setError('');
+      setError();
     };
   }, []);
 

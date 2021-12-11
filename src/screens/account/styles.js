@@ -48,7 +48,6 @@ export default styles = StyleSheet.create({
     borderColor: COLORS.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 3,
   },
   iconStyle: {
     width: SIZES.width * 0.09,

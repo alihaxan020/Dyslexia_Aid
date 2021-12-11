@@ -6,19 +6,21 @@ import {
   Image,
   ImageBackground,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import Chart from '../../components/dyslexicTest/Chart';
 import styles from './styles';
-import {images, COLORS, icons, SIZES} from '../../constants';
+import {images, COLORS, SIZES} from '../../constants';
 import {useLogin} from '../../context/LoginProvider';
 import Profile from '../../../assets/images/user.png';
 import {postUsersScroes} from '../../api/user';
 import LottieView from 'lottie-react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const profileUri = Image.resolveAssetSource(Profile).uri;
 
-const UserProfile = () => {
-  const {setUserInfo, userInfo} = useLogin();
+const UserProfile = ({navigation}) => {
+  const {userInfo} = useLogin();
   const [written, setWritten] = useState();
   const [verbal, setVerbal] = useState();
   const [check, setCheck] = useState(false);
@@ -43,6 +45,16 @@ const UserProfile = () => {
             }}
             style={styles.imageStyle}
           />
+          <TouchableOpacity
+            onPress={() => navigation.navigate('EditProfile')}
+            style={{
+              position: 'absolute',
+              right: 0,
+              bottom: 0,
+              elevation: 4,
+            }}>
+            <FontAwesome5 name="user-edit" size={30} />
+          </TouchableOpacity>
         </View>
         <Text style={styles.headingText}>{userInfo.name}</Text>
       </View>

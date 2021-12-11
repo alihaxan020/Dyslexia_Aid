@@ -11,8 +11,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import {SIZES, COLORS} from '../../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const FormInput = props => {
-  //const {icon, secureEntry, handleSecure, errorMessage} = props;
-
   const {formikProps, formikKey, icon, secureEntry, handleSecure} = props;
   return (
     <>
