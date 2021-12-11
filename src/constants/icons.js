@@ -20,6 +20,8 @@ export const difficultyMedium = require('../../assets/icons/difficultyMedium.png
 export const difficultyHard = require('../../assets/icons/difficultyHard.png');
 export const scoreIcon = require('../../assets/icons/scoreIcon.png');
 export const mic = require('../../assets/icons/mic.png');
+export const practiceIcon = require('../../assets/icons/practiceIcon.png');
+export const tapIcon = require('../../assets/icons/tapIcon.png');
 
 export default {
   camera,
@@ -43,4 +45,6 @@ export default {
   difficultyHard,
   scoreIcon,
   mic,
+  practiceIcon,
+  tapIcon,
 };

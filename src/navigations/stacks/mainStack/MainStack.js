@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabStack from '../../tabNavigation/TabStack';
 import DyslexicTestStack from '../Home/DyslexicTestStack';
 import AssessmentFormStack from '../Home/AssessmentFormStack';
+import ReadingImprovementStack from '../Home/ReadingImprovementStack';
 import ReadingStack from '../Home/ReadingStack';
 const Stack = createNativeStackNavigator();
 const MainStack = () => {
@@ -34,6 +35,13 @@ const MainStack = () => {
       <Stack.Screen
         name="ReadingStack"
         component={ReadingStack}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ReadingImprovementStack"
+        component={ReadingImprovementStack}
         options={{
           headerShown: false,
         }}
