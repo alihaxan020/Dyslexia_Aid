@@ -366,8 +366,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconContainer: {
-    borderWidth: 1,
-    borderColor: 'red',
     width: '15%',
     height: '100%',
     justifyContent: 'center',
@@ -378,8 +376,6 @@ const styles = StyleSheet.create({
     height: 35,
   },
   inputTextContainer: {
-    borderWidth: 1,
-    borderColor: 'red',
     width: '85%',
     height: '100%',
     justifyContent: 'space-between',
@@ -390,8 +386,6 @@ const styles = StyleSheet.create({
   gradientContainer: {
     width: width,
     height: height * 0.628,
-    borderWidth: 1,
-    borderColor: 'yellow',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     backgroundColor: COLORS.primary,
@@ -406,8 +400,6 @@ const styles = StyleSheet.create({
     width: width,
     height: height * 0.25,
     marginBottom: height * 0.05,
-    borderWidth: 1,
-    borderColor: 'red',
   },
   errorText: {
     color: 'red',

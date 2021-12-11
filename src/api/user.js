@@ -115,3 +115,24 @@ export const updateProfile = async data => {
     console.log(error.message);
   }
 };
+
+export const rateUs = async data => {
+  try {
+    const tokenProfile = await AsyncStorage.getItem('token');
+    const rateUsRes = await client.post('/rateus', data, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: `JWT ${tokenProfile}`,
+      },
+    });
+
+    if (rateUsRes.data.success) {
+      return rateUsRes.data;
+    } else {
+      return rateUsRes.data;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
