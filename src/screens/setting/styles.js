@@ -44,7 +44,7 @@ export default styles = StyleSheet.create({
   },
   titleStyle: {
     fontSize: SIZES.h3,
-    color: 'red',
+    color: 'black',
     height: SIZES.height * 0.08,
     textAlignVertical: 'top',
   },
