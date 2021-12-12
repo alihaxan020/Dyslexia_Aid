@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-import {images, icons, SIZES, COLORS} from '../../../constants';
+import {icons, SIZES, COLORS} from '../../../constants';
 import HeaderTest from '../../../components/common/HeaderTest';
 import GradientView from '../../../components/common/GradientView';
 import BackgroundImageApp from '../../../components/common/BackgroundImageApp';
@@ -27,7 +27,7 @@ const ReadingImprovement = ({navigation}) => {
                 Tap on the icon to listen to the word written on it
               </Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('VerbalTest')}
+                onPress={() => navigation.navigate('ImproveListening')}
                 style={styles.buttonStyle}>
                 <Text style={[styles.titleText]}>Start</Text>
               </TouchableOpacity>
@@ -45,7 +45,7 @@ const ReadingImprovement = ({navigation}) => {
                 Top on the icon to listen to word written on it
               </Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('VerbalTest')}
+                onPress={() => navigation.navigate('ImproveWriting')}
                 style={styles.buttonStyle}>
                 <Text style={[styles.titleText]}>Start</Text>
               </TouchableOpacity>
