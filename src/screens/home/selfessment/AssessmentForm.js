@@ -69,6 +69,7 @@ const AssessmentForm = ({navigation}) => {
   const [speechModal, setSpeechModal] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userData, setUserData] = useState([]);
+  const [yesCounter, setYesCounter] = useState(0);
   const speakRef = useRef();
   const handleContinue = () => setBackModal(true);
   const handleSpeechRate = async rate => {
@@ -85,6 +86,9 @@ const AssessmentForm = ({navigation}) => {
   }, []);
 
   const selectedOption = option => {
+    if (option == 'Yes') {
+      setYesCounter(prevValue => prevValue + 1);
+    }
     let objectData = {
       question: question[currentQuestionIndex].question,
       answer: option,
@@ -97,7 +101,9 @@ const AssessmentForm = ({navigation}) => {
     setCurrentQuestionIndex(0);
     setStart(true);
     setUserData([]);
+    setYesCounter(0);
   };
+
   return (
     <BackgroundImageApp>
       <HeaderTest headerText="Assessment Form" BackScreen={handleContinue} />
@@ -123,7 +129,11 @@ const AssessmentForm = ({navigation}) => {
         {start ? (
           <View style={stylesForm.formcontainer}>
             {currentQuestionIndex == '10' ? (
-              <FormReport userData={userData} handleReset={handleResetForm} />
+              <FormReport
+                userData={userData}
+                handleReset={handleResetForm}
+                handleSeverity={yesCounter}
+              />
             ) : (
               <>
                 <View

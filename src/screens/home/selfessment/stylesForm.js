@@ -55,7 +55,7 @@ export default stylesForm = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'black',
     width: '95%',
-    height: '50%',
+    height: '40%',
     borderRadius: 20,
     backgroundColor: COLORS.primary,
   },

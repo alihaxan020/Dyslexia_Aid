@@ -1,15 +1,43 @@
-import React, {useState} from 'react';
-import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Text, View, TouchableOpacity, ScrollView, Image} from 'react-native';
 import styles from '../dyslexiatest/writtenTest/styles';
 import stylesForm from './stylesForm';
+import {icons} from '../../../constants';
 const FormReport = props => {
   const [show, setShow] = useState(false);
   const {userData, handleReset} = props;
-  console.log(userData);
+  const [severity, setSeverity] = useState('');
+  const [difficulty, setDifficulty] = useState();
+  useEffect(() => {
+    console.log(userData);
+    if (props.handleSeverity < 4) {
+      setSeverity('No Dyslexia');
+      setDifficulty(icons.difficultyEasy);
+    } else if (props.handleSeverity >= 4 && props.handleSeverity <= 6) {
+      setSeverity('Low Dyslexia Severity');
+      setDifficulty(icons.difficultyEasy);
+    } else if (props.handleSeverity >= 7 && props.handleSeverity <= 8) {
+      setSeverity('Medium Dyslexia Severity');
+      setDifficulty(icons.difficultyMedium);
+    } else {
+      setSeverity('High Dyslexia Severity');
+      setDifficulty(icons.difficultyHard);
+    }
+    return () => {
+      setSeverity('');
+    };
+  }, []);
+  const handleResetReport = () => {
+    setSeverity('');
+    setDifficulty();
+    handleReset();
+  };
   return (
     <ScrollView>
       <View style={[styles.bodyContainer, {justifyContent: 'space-around'}]}>
         <Text style={styles.title}>Form Report</Text>
+        <Image source={difficulty} />
+        <Text style={styles.title}>{severity}</Text>
         <TouchableOpacity
           style={[styles.submitBtn, {width: '50%', height: '8%'}]}
           onPress={() => setShow(!show)}>
@@ -33,7 +61,13 @@ const FormReport = props => {
                     <Text style={styles.subHeading}>
                       Question: {item.question}
                     </Text>
-                    <Text style={styles.paragrapgh}>Answer: {item.answer}</Text>
+                    <Text
+                      style={[
+                        styles.paragrapgh,
+                        {color: item.answer == 'Yes' ? '#54ff00' : '#ff891f'},
+                      ]}>
+                      Answer: {item.answer}
+                    </Text>
                   </View>
                 ))}
               </View>
@@ -49,7 +83,7 @@ const FormReport = props => {
           }}>
           <TouchableOpacity
             style={stylesForm.btnStyle}
-            onPress={() => handleReset()}>
+            onPress={() => handleResetReport()}>
             <Text
               style={[
                 styles.subHeading,
