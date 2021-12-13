@@ -23,7 +23,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 const data = ['Information', 'Today', 'Dog', 'Read', 'Listen'];
-const WrittenTest = ({navigation}) => {
+const WrittenLevelTwo = ({navigation}) => {
   const [backModal, setBackModal] = useState(false);
   const [result, setResult] = useState('');
   const [isLoading, setLoading] = useState(false);
@@ -85,7 +85,7 @@ const WrittenTest = ({navigation}) => {
     setSpeechEnd(false);
     widthSet.value = 1;
   };
-  const nextLevel = () => navigation.navigate('WrittenLevelTwo');
+  const nextLevel = () => navigation.navigate('WrittenLevelThree');
   const handleReset = () => {
     setResult('');
     setScore(0);
@@ -107,7 +107,7 @@ const WrittenTest = ({navigation}) => {
   });
   return (
     <BackgroundImageApp>
-      <HeaderTest headerText="Written Test" BackScreen={handleContinue} />
+      <HeaderTest headerText="Level 2" BackScreen={handleContinue} />
       <ModalApp
         visible={backModal}
         feedback=" Do you want quit the Written Test?"
@@ -124,12 +124,12 @@ const WrittenTest = ({navigation}) => {
             nextLevel={nextLevel}
             obtainedScore={score}
             totalScore={test.length}
-            level="Level 1"
+            level="Level 2"
           />
         ) : (
           <>
             <View style={styles.instructionContainer}>
-              <Text style={styles.title}>Level 1</Text>
+              <Text style={styles.title}>Level 2</Text>
               <GradientView
                 colors={[COLORS.primary, COLORS.secondary]}
                 style={styles.questionCount}>
@@ -239,4 +239,4 @@ const WrittenTest = ({navigation}) => {
   );
 };
 
-export default WrittenTest;
+export default WrittenLevelTwo;

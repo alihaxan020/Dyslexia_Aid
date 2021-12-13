@@ -5,6 +5,8 @@ import VerbalTest from '../../../screens/home/dyslexiatest/VerbalTest/VerbalTest
 import WrittenTest from '../../../screens/home/dyslexiatest/writtenTest/WrittenTest';
 import LevelTwo from '../../../screens/home/dyslexiatest/VerbalTest/LevelTwo';
 import LevelThree from '../../../screens/home/dyslexiatest/VerbalTest/LevelThree';
+import WrittenLevelThree from '../../../screens/home/dyslexiatest/writtenTest/WrittenLevelThree';
+import WrittenLevelTwo from '../../../screens/home/dyslexiatest/writtenTest/WrittenLevelTwo';
 const Stack = createNativeStackNavigator();
 const DyslexicTestStack = () => {
   return (
@@ -40,6 +42,20 @@ const DyslexicTestStack = () => {
       <Stack.Screen
         name="WrittenTest"
         component={WrittenTest}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="WrittenLevelThree"
+        component={WrittenLevelThree}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="WrittenLevelTwo"
+        component={WrittenLevelTwo}
         options={{
           headerShown: false,
         }}

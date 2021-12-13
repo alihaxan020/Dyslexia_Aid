@@ -63,7 +63,7 @@ export default stylesForm = StyleSheet.create({
     width: SIZES.width * 0.21,
     height: SIZES.width * 0.21,
     resizeMode: 'cover',
-    verflow: 'hidden',
+    overflow: 'hidden',
     borderRadius: (SIZES.width * 0.21) / 2,
     borderWidth: 3,
     borderColor: 'black',

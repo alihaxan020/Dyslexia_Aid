@@ -1,5 +1,5 @@
-import React, {useState, useRef} from 'react';
-import {View, Text, Image, TouchableOpacity, Modal} from 'react-native';
+import React, {useState, useRef, useEffect} from 'react';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {images, COLORS} from '../../../../constants';
 import HeaderTest from '../../../../components/common/HeaderTest';
@@ -11,6 +11,7 @@ import Report from '../../../../components/dyslexicTest/Report';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SpeechSettingModal from '../../../../components/common/SpeechSettingModal';
 import Animated, {SlideInLeft, SlideOutLeft} from 'react-native-reanimated';
+import {getVerbalTest} from '../../../../api/dyslexiaTest';
 const data = [
   {
     question: 'Sad',
@@ -45,7 +46,7 @@ const data = [
 ];
 
 const VerbalTest = ({navigation}) => {
-  const allQuestions = data;
+  const [allQuestions, setAllQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
   const [correctOption, setCorrectOption] = useState(null);
@@ -103,6 +104,14 @@ const VerbalTest = ({navigation}) => {
     speakRef.current.setSpeechPitch(rate);
     setSpeechPitch(rate);
   };
+  useEffect(() => {
+    const postUserScore = async () => {
+      const res = await getVerbalTest();
+      setAllQuestions(res.data.verbalQuestions);
+      console.log(res.data.verbalQuestions);
+    };
+    postUserScore();
+  }, []);
   return (
     <BackgroundImageApp>
       <HeaderTest headerText="Verbal Test" BackScreen={handleContinue} />
