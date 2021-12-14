@@ -13,10 +13,23 @@ import {useLogin} from '../../context/LoginProvider';
 import FastImage from 'react-native-fast-image';
 import profile from '../../../assets/images/user.png';
 import BackgroundImageApp from '../../components/common/BackgroundImageApp';
+import DocumentPicker from 'react-native-document-picker';
+import FileViewer from 'react-native-file-viewer';
 const profileUri = Image.resolveAssetSource(profile).uri;
 
 const HomeScreen = ({navigation}) => {
   const {userInfo} = useLogin();
+  const openPicker = async () => {
+    try {
+      const res = await DocumentPicker.pickSingle({
+        type: [DocumentPicker.types.allFiles],
+      });
+      console.log(JSON.stringify([res]));
+      await FileViewer.open(JSON.stringify([res.uri]).slice(2, -2));
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <BackgroundImageApp>
       <View
@@ -87,7 +100,7 @@ const HomeScreen = ({navigation}) => {
               iconImage={images.selfassessment}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log('Save Document')}>
+          <TouchableOpacity onPress={openPicker}>
             <ViewCard
               bgColor={COLORS.lightGoldenrod}
               delay={900}

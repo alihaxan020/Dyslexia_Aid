@@ -1,0 +1,14 @@
+export const dialogflowConfig = {
+  type: 'service_account',
+  project_id: 'dyslexiabot-xs9h',
+  private_key_id: 'd53a929ad14cd85a11740cdee72355cdd7bda483',
+  private_key:
+    '-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDQNnYbPd5zQcTT\n04oaW9XnluTiJCo125zPtVyUdSGfXkMK7Jw/6bupjKwyrW6YhwYpOsIVY83A4esX\nKdFCze3Gg0eB+uUqzc6oDZUoSYmwwlCLtAq2U3K2ANzeVlwJYwKW4VDuPRD1RS6I\n9OrX4xwPM0JHeOo6yUyhZxZMpAOF1yN6BikU3l/trord3GLP6QI6GxrwOCRFFaej\nKCmk1rg7CtV0iia7l1kogMqQj7Gf0iB1fgTzF5CT7X6gRVswPhcN7c6aNP9zJNn8\nLeQxoqv1yG/dd5mK/hM/avKQkmInI1inxPXUTfaswZW3IcvJ9VeWvwThfWT9BHGD\ncAy+quJjAgMBAAECggEATSAfV6/vOppeImj1exYRghuu5OWojRKwX3A6vvM0ZSgx\nhVZn+nTGAuQM1SjREsbRTWxqgCncCVqmDop67VgCf8oZLtiVEunxZubBHY8/5a3U\n0Cr83NTEZQ6kwecTaJa4WtNTeyw7n97kge7XHukNd8PxBTCQ8v2l2ROqevE2LNj9\nBBOgh1iz0NosuL2xXj4veEfGSoyIFC46+Jp32GDe42UjopUhRBXJT4TVMCZF/dvI\nP6h8zjmbVdu+iJYtAYWv3rBkBMS6pCy3dFs3gBUE1reFUrujTTHiLuAq1yKbh8Rn\n8C8fa3YSOwKsyvLQAzJbi/nQ1epOsWbodAEvMqnaIQKBgQD0jY8bAUazFwKvy6xL\n7kGTNh2MinRhugasaMP1/UszVsIDQdLZ+Ix2ckEX/QdqoGiUZG31TRHSisbdiQ87\nVcZZRyy2ImYaVg6ri1ZbSh8pooyKrENaevgi7e4hbKc0KZs8BUhyXyZcqvvDTs/w\nxlD3RQ7H2DMvv03fv+MZX2dRzwKBgQDZ9XFlcgYoVG+PydIrwxO85iJE71TLb527\nlqCZ32LHiSwFc6AaAS+cbHNcz4/5VwwCI4fPSwLmUyWnquGzyZET6D5jdGIzA3Jv\nuf+xcr/nRLg/A+QUc05e/qkMHhUUfNYb07jhKGkiSME552rA7MEzE2n/XqHa2Vin\nVILrfFuvLQKBgFrtEys4Q0AtKwuPz8T/lhQVB9GMXQ9E6lxKK6oXflFdTY+Gds4i\ncp9LhdZUduB3OcsKuDN/b0P3407VOfuWvcPOCdrCWXIrUxMHIJmaqpGBZX3d5MEM\nfZwHGQYGbvifC5+6WyBjLlFAJZGNiRT9t3boj0FQql9zYpHxt49kgHbTAoGBALVj\nk2yWmVNE+ddTYcqzvaBuccSm3Q21JTLxp1SHWQCwQueCk5IwvHvUsaliv/IFJGQ/\nR44XYiFmvyarisyCCm/jztAcEoFb9AfRZl86HUUNprwis9TlJSrfirYf7vEu900P\nRYR0ihJTNCPJWMmX/y1Pkd5J1i94xFP1fEMYKoE9AoGBAKNEHzzIx+cTrXYXwKoI\nS3c0nJ9cHpnU0ObWpkk6POSkOsN+60ixzHJVugOBthcqQncS3MRRHNoWEFVgbyMV\nfkixfIDUiKizuAitkWzosmCIXQMQes/s3qOElrNhSxIB0vDL5AUYPXA//1AM51JK\nc8YlaSx4w5GXI0Y7Tc6TFy6P\n-----END PRIVATE KEY-----\n',
+  client_email: 'dyslexiaaidchatbot@dyslexiabot-xs9h.iam.gserviceaccount.com',
+  client_id: '115687322952720012579',
+  auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+  token_uri: 'https://oauth2.googleapis.com/token',
+  auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+  client_x509_cert_url:
+    'https://www.googleapis.com/robot/v1/metadata/x509/dyslexiaaidchatbot%40dyslexiabot-xs9h.iam.gserviceaccount.com',
+};

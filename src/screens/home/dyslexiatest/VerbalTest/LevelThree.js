@@ -9,7 +9,8 @@ import GradientView from '../../../../components/common/GradientView';
 import {images, COLORS} from '../../../../constants';
 import styles from './styles';
 import Report from '../../../../components/dyslexicTest/Report';
-const data = ['Information', 'Today', 'Dog', 'Read', 'Listen'];
+import AppLoader from '../../../../components/common/AppLoader';
+import {getVerbalTest} from '../../../../api/dyslexiaTest';
 
 const LevelThree = ({navigation}) => {
   const [backModal, setBackModal] = useState(false);
@@ -23,7 +24,7 @@ const LevelThree = ({navigation}) => {
   const [compare, setCompare] = useState(false);
   const [check, setCheck] = useState(false);
   const [report, setReport] = useState(false);
-
+  const [fetch, setfetch] = useState(true);
   const BackScreen = navigation.goBack;
   const speakRef = useRef();
   const handleContinue = () => setBackModal(true);
@@ -45,7 +46,19 @@ const LevelThree = ({navigation}) => {
     setCheck(true);
   };
   useEffect(() => {
-    setTest(data);
+    const postUserScore = async () => {
+      const test = 'Verbal';
+      const level = 'Level 3';
+      const data = {
+        test,
+        level,
+      };
+      const res = await getVerbalTest(data);
+      console.log(res.data[0].verbalQuestions);
+      setTest(res.data[0].verbalQuestions);
+      setfetch(false);
+    };
+    postUserScore();
   }, []);
   const handleNext = () => {
     setCheck(false);
@@ -64,155 +77,171 @@ const LevelThree = ({navigation}) => {
   return (
     <BackgroundImageApp>
       <HeaderTest headerText="Verbal Level 3" BackScreen={handleContinue} />
-      <TextToSpeech ref={speakRef} />
-      <ModalApp
-        visible={backModal}
-        feedback=" Do you want quit the Dyslexic Test?"
-        quit={BackScreen}
-        continueTest={() => setBackModal(false)}
-        quitText="Go Back"
-        continueTestText="Continue"
-      />
-
-      <SpeechSettingModal
-        visible={speechModal}
-        handleSpeechPitch={handleSpeechPitch}
-        handleSpeechRate={handleSpeechRate}
-        speechRate={speechRate}
-        speechPitch={speechPitch}
-        setSpeechModal={setSpeechModal}
-      />
-      {report ? (
-        <Report
-          test="Verbal"
-          level="Level 3"
-          obtainedScore={score}
-          totalScore={data.length}
-          resetTest={restartQuiz}
-        />
+      {fetch ? (
+        <AppLoader />
       ) : (
-        <View style={styles.bodyContainer}>
-          <View style={styles.instructionContainer}>
-            <Text style={styles.levelText}>Level 3</Text>
-            <GradientView
-              colors={[COLORS.primary, COLORS.secondary]}
-              style={styles.questionCount}>
-              <Text style={styles.subHeading}>
-                {currentQuestionIndex + 1}/{test.length}
-              </Text>
-            </GradientView>
-            <Text style={styles.headingText}>
-              Press the below button to listen word
-            </Text>
-          </View>
-          <View style={styles.optionsSection}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-              }}>
-              <View
-                style={{
-                  width: '50%',
-                  justifyContent: 'flex-end',
-                  flexDirection: 'row',
-                }}>
-                <TouchableOpacity
-                  onPress={() =>
-                    speakRef.current.getAlert(test[currentQuestionIndex])
-                  }>
-                  <Image
-                    style={styles.listenImage}
-                    source={images.listenicon}
-                  />
-                </TouchableOpacity>
+        <>
+          <TextToSpeech ref={speakRef} />
+          <ModalApp
+            visible={backModal}
+            feedback=" Do you want quit the Dyslexic Test?"
+            quit={BackScreen}
+            continueTest={() => setBackModal(false)}
+            quitText="Go Back"
+            continueTestText="Continue"
+          />
+
+          <SpeechSettingModal
+            visible={speechModal}
+            handleSpeechPitch={handleSpeechPitch}
+            handleSpeechRate={handleSpeechRate}
+            speechRate={speechRate}
+            speechPitch={speechPitch}
+            setSpeechModal={setSpeechModal}
+          />
+          {report ? (
+            <Report
+              test="Verbal"
+              level="Level 3"
+              obtainedScore={score}
+              totalScore={data.length}
+              resetTest={restartQuiz}
+            />
+          ) : (
+            <View style={styles.bodyContainer}>
+              <View style={styles.instructionContainer}>
+                <Text style={styles.levelText}>Level 3</Text>
+                <GradientView
+                  colors={[COLORS.primary, COLORS.secondary]}
+                  style={styles.questionCount}>
+                  <Text style={styles.subHeading}>
+                    {currentQuestionIndex + 1}/{test.length}
+                  </Text>
+                </GradientView>
+                <Text style={styles.headingText}>
+                  Press the below button to listen word
+                </Text>
               </View>
-              <TouchableOpacity onPress={() => setSpeechModal(true)}>
-                <Image
-                  style={styles.speechSettings}
-                  source={images.voiceSetting}
-                />
-              </TouchableOpacity>
-            </View>
-            <View
-              style={[styles.optionContainer, {justifyContent: 'flex-start'}]}>
-              {check ? (
+              <View style={styles.optionsSection}>
                 <View
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    flexDirection: 'column',
-                    justifyContent: 'space-evenly',
+                    flexDirection: 'row',
                     alignItems: 'center',
+                    justifyContent: 'flex-start',
                   }}>
-                  <Text style={styles.subHeading}>Result</Text>
-                  <Text style={styles.subHeading}>Pronounced Word</Text>
                   <View
-                    style={[styles.resultText, {borderColor: COLORS.success}]}>
-                    <Text style={[styles.headingText, {color: 'black'}]}>
-                      {test[currentQuestionIndex]}
-                    </Text>
+                    style={{
+                      width: '50%',
+                      justifyContent: 'flex-end',
+                      flexDirection: 'row',
+                    }}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        speakRef.current.getAlert(test[currentQuestionIndex])
+                      }>
+                      <Image
+                        style={styles.listenImage}
+                        source={images.listenicon}
+                      />
+                    </TouchableOpacity>
                   </View>
+                  <TouchableOpacity onPress={() => setSpeechModal(true)}>
+                    <Image
+                      style={styles.speechSettings}
+                      source={images.voiceSetting}
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View
+                  style={[
+                    styles.optionContainer,
+                    {justifyContent: 'flex-start'},
+                  ]}>
+                  {check ? (
+                    <View
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        flexDirection: 'column',
+                        justifyContent: 'space-evenly',
+                        alignItems: 'center',
+                      }}>
+                      <Text style={styles.subHeading}>Result</Text>
+                      <Text style={styles.subHeading}>Pronounced Word</Text>
+                      <View
+                        style={[
+                          styles.resultText,
+                          {borderColor: COLORS.success},
+                        ]}>
+                        <Text style={[styles.headingText, {color: 'black'}]}>
+                          {test[currentQuestionIndex]}
+                        </Text>
+                      </View>
 
-                  <Text style={styles.subHeading}>You wrote</Text>
-                  <View
-                    style={[
-                      styles.resultText,
-                      {borderColor: compare ? COLORS.success : COLORS.error},
-                    ]}>
-                    <Text
-                      style={[
-                        styles.headingText,
-                        {color: compare ? COLORS.success : COLORS.error},
-                      ]}>
-                      {text}
-                    </Text>
-                  </View>
-                  <Text>
-                    {currentQuestionIndex == test.length - 1 ? (
-                      <TouchableOpacity onPress={() => setReport(true)}>
+                      <Text style={styles.subHeading}>You wrote</Text>
+                      <View
+                        style={[
+                          styles.resultText,
+                          {
+                            borderColor: compare
+                              ? COLORS.success
+                              : COLORS.error,
+                          },
+                        ]}>
+                        <Text
+                          style={[
+                            styles.headingText,
+                            {color: compare ? COLORS.success : COLORS.error},
+                          ]}>
+                          {text}
+                        </Text>
+                      </View>
+                      <Text>
+                        {currentQuestionIndex == test.length - 1 ? (
+                          <TouchableOpacity onPress={() => setReport(true)}>
+                            <GradientView
+                              colors={[COLORS.success, COLORS.success]}
+                              style={[styles.nextButton, {marginTop: 10}]}>
+                              <Text style={styles.headingText}>Get Report</Text>
+                            </GradientView>
+                          </TouchableOpacity>
+                        ) : (
+                          <TouchableOpacity onPress={() => handleNext()}>
+                            <GradientView
+                              colors={[COLORS.primary, COLORS.secondary]}
+                              style={[styles.nextButton, {marginTop: 10}]}>
+                              <Text style={styles.headingText}>Next Word</Text>
+                            </GradientView>
+                          </TouchableOpacity>
+                        )}
+                      </Text>
+                    </View>
+                  ) : (
+                    <View style={styles.textContainer}>
+                      <TextInput
+                        value={text}
+                        onChangeText={e => setText(e)}
+                        style={[
+                          styles.paragrapgh,
+                          styles.textInputStyle,
+                          {color: 'black'},
+                        ]}
+                        placeholder="Enter pronounced word"
+                      />
+                      <TouchableOpacity onPress={() => handleSubmit()}>
                         <GradientView
                           colors={[COLORS.success, COLORS.success]}
                           style={[styles.nextButton, {marginTop: 10}]}>
-                          <Text style={styles.headingText}>Get Report</Text>
+                          <Text style={styles.headingText}>Submit</Text>
                         </GradientView>
                       </TouchableOpacity>
-                    ) : (
-                      <TouchableOpacity onPress={() => handleNext()}>
-                        <GradientView
-                          colors={[COLORS.primary, COLORS.secondary]}
-                          style={[styles.nextButton, {marginTop: 10}]}>
-                          <Text style={styles.headingText}>Next Word</Text>
-                        </GradientView>
-                      </TouchableOpacity>
-                    )}
-                  </Text>
+                    </View>
+                  )}
                 </View>
-              ) : (
-                <View style={styles.textContainer}>
-                  <TextInput
-                    value={text}
-                    onChangeText={e => setText(e)}
-                    style={[
-                      styles.paragrapgh,
-                      styles.textInputStyle,
-                      {color: 'black'},
-                    ]}
-                    placeholder="Enter pronounced word"
-                  />
-                  <TouchableOpacity onPress={() => handleSubmit()}>
-                    <GradientView
-                      colors={[COLORS.success, COLORS.success]}
-                      style={[styles.nextButton, {marginTop: 10}]}>
-                      <Text style={styles.headingText}>Submit</Text>
-                    </GradientView>
-                  </TouchableOpacity>
-                </View>
-              )}
+              </View>
             </View>
-          </View>
-        </View>
+          )}
+        </>
       )}
     </BackgroundImageApp>
   );
