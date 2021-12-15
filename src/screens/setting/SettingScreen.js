@@ -45,28 +45,6 @@ const SettingScreen = ({navigation}) => {
               />
             </View>
           </View>
-          <View style={styles.viewContainer}>
-            <View style={styles.iconView}>
-              <MaterialCommunityIcons
-                name="format-font"
-                size={30}
-                color="white"
-              />
-            </View>
-            <View style={styles.textView}>
-              <Text style={styles.subHeading}>Font Setting</Text>
-              <Text style={[styles.paragrapgh, {fontWeight: '300'}]}>
-                Change the font size
-              </Text>
-            </View>
-            <View style={styles.iconView}>
-              <Image
-                source={images.arrowRight}
-                style={styles.icon}
-                resizeMode="contain"
-              />
-            </View>
-          </View>
 
           <TouchableOpacity
             style={styles.viewContainer}

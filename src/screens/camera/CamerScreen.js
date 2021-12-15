@@ -111,7 +111,7 @@ const CamerScreen = ({navigation}) => {
 
     formData.append('image', data);
 
-    fetch('http://192.168.1.104:6000/api/textrecognize', {
+    fetch('http://192.168.43.220:6000/api/textrecognize', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',

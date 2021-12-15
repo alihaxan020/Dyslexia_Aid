@@ -1,4 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react';
+import Animated, {SlideInLeft, SlideOutLeft} from 'react-native-reanimated';
+var randomWords = require('random-words');
 import {
   StyleSheet,
   View,
@@ -6,6 +8,7 @@ import {
   Text,
   Button,
   TouchableOpacity,
+  BackgroundImage,
 } from 'react-native';
 import {SIZES} from '../../../constants';
 import HeaderTest from '../../../components/common/HeaderTest';
@@ -20,9 +23,13 @@ import BackgroundImageApp from '../../../components/common/BackgroundImageApp';
 const ImproveListening = ({navigation}) => {
   const BackScreen = navigation.goBack;
   const [refreshed, setRefreshed] = useState(0);
+  const [array, setArray] = useState([]);
   const ref = useRef();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const a = randomWords(5);
+    setArray(a);
+  }, []);
   const animate = () => {
     console.log('first time');
     ref.current.animateNextTransition();
@@ -39,23 +46,10 @@ const ImproveListening = ({navigation}) => {
       <Transition.Out type="slide-top" durationMs={3000} />
     </Transition.Sequence>
   );
-  const array = [
-    {
-      key: '1',
-      title: 'example title 1',
-      subtitle: 'example subtitle 1',
-    },
-    {
-      key: '2',
-      title: 'example title 2',
-      subtitle: 'example subtitle 2',
-    },
-    {
-      key: '3',
-      title: 'example title 3',
-      subtitle: 'example subtitle 3',
-    },
-  ];
+  const handleArray = () => {
+    const a = randomWords(5);
+    console.log(a);
+  };
   return (
     <BackgroundImageApp>
       <HeaderTest headerText="Improve Listening" BackScreen={BackScreen} />
@@ -71,7 +65,26 @@ const ImproveListening = ({navigation}) => {
         <Text style={styles.titleText}>Tap on any word to listen</Text>
         <Text style={styles.titleText}>the word written on it</Text>
       </View>
-      <View style={{flex: 1, borderWidth: 1, borderColor: 'red'}}></View>
+      <View style={{flex: 1, borderWidth: 1, borderColor: 'red'}}>
+        {array.map((key, item) => (
+          <View
+            key={key}
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <View
+              style={{
+                backgroundColor: 'green',
+                width: SIZES.width * 0.3,
+                height: SIZES.width * 0.3,
+              }}>
+              <Text>{item}</Text>
+            </View>
+          </View>
+        ))}
+      </View>
       <View
         style={{
           width: SIZES.width,
@@ -81,7 +94,7 @@ const ImproveListening = ({navigation}) => {
           borderWidth: 1,
           borderColor: 'red',
         }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleArray()}>
           <Text style={styles.titleText}>Tap on any word to listen</Text>
         </TouchableOpacity>
       </View>
