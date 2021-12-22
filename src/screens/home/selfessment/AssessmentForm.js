@@ -109,7 +109,7 @@ const AssessmentForm = ({navigation}) => {
       <HeaderTest headerText="Assessment Form" BackScreen={handleContinue} />
       <ModalApp
         visible={backModal}
-        feedback=" Do you want quit the Written Test?"
+        feedback=" Do you want quit the Assessment Test?"
         quit={BackScreen}
         continueTest={() => setBackModal(false)}
         quitText="Go Back"

@@ -41,7 +41,7 @@ const Summarizer = ({route, navigation}) => {
   const summApi = () => {
     var data = new FormData();
     data.append('rawtext', rawtext);
-    fetch('http://192.168.43.220:6000/api/analyze', {
+    fetch('http://192.168.1.102:6000/api/analyze', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',

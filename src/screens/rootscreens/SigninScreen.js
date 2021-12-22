@@ -37,13 +37,18 @@ const SigninScreen = ({navigation}) => {
   };
   const onSubmit = async (values, actions) => {
     setLoginPending(true);
-
     try {
       const res = await signIn(values.email, values.password);
       if (res.data.success) {
         setTimeout(() => setLoginPending(false), 1000);
         setUserInfo(res.data.user);
         setIsLoggedIn(true);
+      } else {
+        setTimeout(() => {
+          actions.setSubmitting(false);
+          setError('');
+          actions.resetForm();
+        }, 1000);
       }
     } catch (error) {
       setLoginPending(false);
@@ -51,12 +56,6 @@ const SigninScreen = ({navigation}) => {
       setError('Invalid Email or Password, try again');
       actions.resetForm();
     }
-
-    setTimeout(() => {
-      actions.setSubmitting(false);
-      setError('');
-      actions.resetForm();
-    }, 2000);
   };
   useEffect(() => {
     return () => {

@@ -1,15 +1,25 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, TouchableOpacity, ScrollView, Image} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  Alert,
+} from 'react-native';
 import styles from '../dyslexiatest/writtenTest/styles';
 import stylesForm from './stylesForm';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import client from '../../../api/client';
 import {icons} from '../../../constants';
+import {useLogin} from '../../../context/LoginProvider';
 const FormReport = props => {
+  const {setLoginPending} = useLogin();
   const [show, setShow] = useState(false);
   const {userData, handleReset} = props;
   const [severity, setSeverity] = useState('');
   const [difficulty, setDifficulty] = useState();
   useEffect(() => {
-    console.log(userData);
     if (props.handleSeverity < 4) {
       setSeverity('No Dyslexia');
       setDifficulty(icons.difficultyEasy);
@@ -27,6 +37,35 @@ const FormReport = props => {
       setSeverity('');
     };
   }, []);
+  const saveAssementForm = async () => {
+    setLoginPending(true);
+    const data = {
+      severity: difficulty,
+      userForm: userData,
+    };
+    try {
+      const token = await AsyncStorage.getItem('token');
+      let tokenProfile = `JWT ${token}`;
+      const res = await client.post('/selfassessment', data, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          authorization: tokenProfile,
+        },
+      });
+      if (res.data.success) {
+        setLoginPending(false);
+        Alert.alert(
+          'Dyslexia Aid',
+          'Your dyslexia form has been submitted successfully.',
+          [{text: 'Go Back', onPress: () => handleResetReport()}],
+        );
+      }
+      console.log(res.data);
+    } catch (error) {
+      console.log('Error: ', error);
+    }
+  };
   const handleResetReport = () => {
     setSeverity('');
     setDifficulty();
@@ -94,7 +133,7 @@ const FormReport = props => {
           </TouchableOpacity>
           <TouchableOpacity
             style={[stylesForm.btnStyle]}
-            onPress={() => console.log('Show Options')}>
+            onPress={() => saveAssementForm()}>
             <Text
               style={[
                 styles.subHeading,
