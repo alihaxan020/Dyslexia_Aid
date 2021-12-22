@@ -11,7 +11,8 @@ import stylesForm from './stylesForm';
 import FormReport from './FormReport';
 import GradientView from '../../../components/common/GradientView';
 import {images, COLORS} from '../../../constants';
-
+import {getSelfassessmentTest} from '../../../api/dyslexiaTest';
+import {useLogin} from '../../../context/LoginProvider';
 const data = [
   {
     question: 'Do you try to avoid reading and writing whenever possible?',
@@ -71,6 +72,7 @@ const AssessmentForm = ({navigation}) => {
   const [userData, setUserData] = useState([]);
   const [yesCounter, setYesCounter] = useState(0);
   const speakRef = useRef();
+  const {setLoginPending} = useLogin();
   const handleContinue = () => setBackModal(true);
   const handleSpeechRate = async rate => {
     speakRef.current.setSpeechRate(rate);
@@ -82,9 +84,13 @@ const AssessmentForm = ({navigation}) => {
   };
   const BackScreen = navigation.goBack;
   useEffect(() => {
-    setQuestion(data);
+    const getTest = async () => {
+      const res = await getSelfassessmentTest();
+      console.log(res.data[0].test);
+      setQuestion(res.data[0].test);
+    };
+    getTest();
   }, []);
-
   const selectedOption = option => {
     if (option == 'Yes') {
       setYesCounter(prevValue => prevValue + 1);
