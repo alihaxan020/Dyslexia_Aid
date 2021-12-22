@@ -40,7 +40,7 @@ const FormReport = props => {
   const saveAssementForm = async () => {
     setLoginPending(true);
     const data = {
-      severity: difficulty,
+      severity: severity,
       userForm: userData,
     };
     try {
